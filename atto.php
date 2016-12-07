@@ -14,19 +14,20 @@
 		die('<script>alert("'.$link_err.'")</script>');
 	}
 	
+	//Query di restituzione dati
 	$display_query = "SELECT *
 										FROM pratica.dat
 										JOIN pratica.loc
 										ON loc = locID
 										WHERE pratica.dat.ID = ".$ID;
 	
-	//Esecuzione inserimento loc
+	//Esecuzione restituzione dati
 	$display_stmt = sqlsrv_query($link, $display_query);
-	
 	if($display_stmt === false){
 		die('<script>alert("'.$display_err.'")</script>');
 	}
 	
+	//Trascrizione variabili dati
 	while($row = sqlsrv_fetch_array($display_stmt, SQLSRV_FETCH_ASSOC)){
 		$atto = $row['atto'];
 		$numero = $row['numero'];
@@ -44,7 +45,7 @@
 		$attID = $row['att'];
 	}
 		
-	//Valori da stampare per proprietà;
+	//Elaborazione e assegnazione valori da stampare per proprietà
 	if($cognome === 'X' AND $nome === 'X' AND $societa === 'X'){
 		$proprieta = "<span style='float: left'>Nessun riferimento di propriet&agrave; presente in database";
 	}elseif($cognome !== 'X' AND $nome !== 'X' AND $societa === 'X'){
@@ -59,7 +60,7 @@
 		$proprieta = "<span style='float: left'>Propriet&agrave;: </span><span style='float: right'><i class='fa fa-user' aria-hidden='true'></i> ".$cognome." ".$nome." &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class='fa fa-users' aria-hidden='true'></i> ".$societa."</span>";
 	}
 	
-	//Valori da stampare per dati catastali
+	//Elaborazione e assegnazione valori da stampare per dati catastali
 	if($foglio !== 0 AND $mappale !== 0 AND $subalterno !== 0){
 		$catastali = "<span style='float: left'>Dati Catastali: </span><span style='float: right'>Foglio ".$foglio." Mappale ".$mappale." Subalterno ".$subalterno."</span>";
 	}elseif($foglio !== 0 AND $mappale !== 0 AND $subalterno === 0){
@@ -72,12 +73,13 @@
 		$catastali = "<span style='float: left'>Riferimento di Foglio Mancante: </span><span style='float: right'>Mappale ".$mappale." Subalterno ".$subalterno."</span>";
 	}
 
+	//Query di restituzione estensioni allegati
 	$att_query = "SELECT *
 								FROM pratica.att
 								WHERE attID = ".$attID;
-	
+
+	//Esecuzione restituzione estensioni allegati
 	$att_stmt = sqlsrv_query($link, $att_query);
-	
 	if($att_stmt === false){
 		die('<script>alert("'.$att_err.'")</script>');
 	}
