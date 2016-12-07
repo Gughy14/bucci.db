@@ -84,32 +84,40 @@
 		die('<script>alert("'.$att_err.'")</script>');
 	}
 	
+	//Creazione array di estensione
 	while($atts = sqlsrv_fetch_array($att_stmt, SQLSRV_FETCH_ASSOC)){
 		
+		//Creazione array di presenza
 		$vals['attID'] = 0;
 		
+		//Elaborazione ricorsiva dell'array di estensione
 		foreach($atts as $key => $att){
+			//Esclude il risultato numerico dell'ID
 			if(!is_numeric($att)){
+				//Attribuisce il valore 0 se nullo
 				if(is_null($att)){
 					$vals[$key] =  0;
+				//In caso contrario attribuisce il valore 1
 				}else{
 					$vals[$key] = 1;
 				}
 			}
 		}
 
-		//Valore da stampare per allegato
-
+		//Assegna all'array file il valore da stampare per ogni allegato
 		$files['void'] = "<a href='/../imgs/void_key.png'>There's a void fissure!</a><br>";
 		$files['presentazione'] = "<a href='presentazione.".$atts['presentazione']."' target='_blank'>Modulo di presentazione</a><br>";
 		$files['inizio_lavori'] = "<a href='inizio_lavori.".$atts['inizio_lavori']."' target='_blank'>Comunicazione inizio lavori</a><br>";
 		$files['relazione_tec'] = "<a href='relazione_tecnica.".$atts['relazione_tec']."' target='_blank'>Relazione Tecnica</a><br>";
 		$files['rilascio'] = "<a href='rilascio.".$atts['rilascio']."' target='_blank'>Rilascio</a><br>";
 		
-		//Associazione chiave => valore
+		//Associa il valore da stampare alla presenza dell'allegato
 		$allegati = array_combine($files, $vals);
 		
-		/*===Stampa della pagina===*/
+	
+		//================================//
+		//===      STAMPA PAGINA       ===//
+		//================================//
 		
 		//Include Intestazione HTML
 		include 'D:/web/head.html';
@@ -159,16 +167,20 @@
 				<div class='panel-body cover'>
 		");
 		
+		//Verifica la presenza degli allegati
 		if(count(array_unique($vals)) !== 1){
+			//Se presente stampa la stringa attribuita per ogni file
 			foreach($allegati as $file => $val){
 				if($val==1){
 					echo($file);
 				}
 			}
+		//In caso non ci siano file restituisce il seguente
 		}else{
 			echo("Nessun allegato presente");
 		}
 		
+		//Stampa la chiusura della tabella allegati
 		echo("
 					</div>
 				</div>

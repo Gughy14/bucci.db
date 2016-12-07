@@ -20,12 +20,14 @@
 	$mkdir_failed = "Si è verificato un errore durante la creazione della cartella in archivio";
 	$size_err = "Impossibile caricare il file poiché di dimensioni superiori a ".str_replace('*','',$max_att_size)." bytes: ";
 	$index_err = "Si è verificato un errore durante la creazione della copertina della pratica";
-
-	//NULLIFIER!
-	$presentazione = NULL;
-	$inizio_lavori = NULL;
-	$relazione_tec = NULL;
-	$rilascio = NULL;
+	
+	//ALLEGATI INSERIBILI
+	$allegabili = array(
+										"presentazione" => "Modulo di Presentazione" ,
+										"inizio_lavori" => "Comunicazione Inizio lavori" ,
+										"relazione_tec" => "Relazione Tecnica" ,
+										"rilascio" => "Documento di Rilascio"
+										);
 ?>
 
 <?php /* INTESTAZIONE HTML */
@@ -54,7 +56,7 @@
 		});
 	});
 	</script>
-	<script><!-- societa-->
+	<script><!-- datepicker -->
 		$(function() {
 			$("#data_presentazione").datepicker({
 				showOtherMonths: true,
@@ -183,50 +185,26 @@
 				<h3 class="panel-title">Allegati</h3>
 			</div>
 			<div class="panel-body"><!-- Corpo del Pannello -->
-				<div class="col-lg-6 col-sm-5 col-10">
-					<span class="help-block">Modulo di presentazione</span>
-					<div class="input-group">
-						<label class="input-group-btn">
-							<span class="btn btn-primary">
-								Carica&hellip; <input type="file" name="presentazione" id="presentazione" style="display: none;">
-							</span>
-						</label>
-						<input type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="col-lg-6 col-sm-5 col-10">
-					<span class="help-block">Comunicazione Inizio lavori</span>
-					<div class="input-group">
-						<label class="input-group-btn">
-							<span class="btn btn-primary">
-								Carica&hellip; <input type="file" name="inizio_lavori" id="inizio_lavori" style="display: none;">
-							</span>
-						</label>
-						<input type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="col-lg-6 col-sm-5 col-10">
-					<span class="help-block">Relazione Tecnica</span>
-					<div class="input-group">
-						<label class="input-group-btn">
-							<span class="btn btn-primary">
-								Carica&hellip; <input type="file" name="relazione_tec" id="relazione_tec" style="display: none;">
-							</span>
-						</label>
-						<input type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="col-lg-6 col-sm-5 col-10">
-					<span class="help-block">Documento di Rilascio</span>
-					<div class="input-group">
-						<label class="input-group-btn">
-							<span class="btn btn-primary">
-								Carica&hellip; <input type="file" name="rilascio" id="rilascio" style="display: none;">
-							</span>
-						</label>
-						<input type="text" class="form-control" readonly>
-					</div>
-				</div>
+			<?php
+				foreach($allegabili as $allegato => $desc){
+					$$allegato = NULL;
+					print('
+								<div class="col-lg-6 col-sm-5 col-10">
+									<span class="help-block">'.$desc.'
+										<span style="float:right;" id="'.$allegato.'" onclick="rimuovifile(this.id)">Rimuovi &times;</span>
+									</span>
+									<div class="input-group">
+										<label class="input-group-btn">
+											<span class="btn btn-primary">
+												Carica&hellip; <input type="file" name="'.$allegato.'_up" id="'.$allegato.'_up" style="display: none;">
+											</span>
+										</label>
+										<input type="text" id="'.$allegato.'_label" class="form-control" readonly>
+									</div>
+								</div>
+								');
+				}
+			?>
 			</div>
 		</div>
 		<div style="text-align: center; margin: 50px auto;"><!-- Pannello Pulsanti -->
@@ -236,6 +214,13 @@
 	</form>
 </section>
 
+	<script><!-- Rimozione Allegati-->
+	function rimuovifile(clicked_id) {
+		var id = (clicked_id);
+		$("#"+id+"_up").replaceWith($("#"+id+"_up").val('').clone(true));
+		document.getElementById(id+"_label").value = "";
+	}
+	</script>
 
 
 <?php /* ELABORAZIONE INSERIMENTO */
@@ -335,7 +320,7 @@
 		
 		//Percorso archiviazione files
 		$percorso_file = $percorso."/";
-		
+						
 		//Elaborazione ricorsiva degli allegati
 		foreach($_FILES as $att => $file){
 			//Controllo presenza file
@@ -344,32 +329,21 @@
 				if($file['size'] > $max_att_size){
 					die('<script>alert("'.$size_err.$file['name'].'")</script>');
 				}else{
-					//Attribuzione percorso&estensione + spostamento file
+					//Attribuisce percorso ed estensione
 					$filename = $percorso_file.basename($file['name']);
 					$infofile = pathinfo($filename);
+					//Sposta il file in archivio
 					move_uploaded_file($file['tmp_name'], $filename);
-					//Rinomina file in base al loro contenuto
-					switch($att) {
-						case "presentazione":
-							rename($filename, $percorso_file."presentazione.".$infofile['extension']);
-							$presentazione = $infofile['extension'];
-							break;
-						case "inizio_lavori":
-							rename($filename, $percorso_file."inizio_lavori.".$infofile['extension']);
-							$inizio_lavori = $infofile['extension'];
-							break;
-						case "relazione_tec":
-							rename($filename, $percorso_file."relazione_tec.".$infofile['extension']);
-							$relazione_tec = $infofile['extension'];
-							break;
-						case "rilascio":
-							rename($filename, $percorso_file."rilascio.".$infofile['extension']);
-							$rilascio = $infofile['extension'];
-							break;
-					}
+					//Rimuove il suffisso "_up" dal nome
+					$att_trunc = str_replace('_up','',$att);
+					//Rinomina il file in base alla categoria
+					rename($filename, $percorso_file.$att_trunc.".".$infofile['extension']);
+					$$att_trunc = $infofile['extension'];
 				}
 			}
 		}
+
+		
 		
 		//================================//
 		//=== INSERIMENTO IN DATABASE  ===//

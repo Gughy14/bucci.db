@@ -276,7 +276,6 @@
 		$search_stmt = sqlsrv_query($link, $search_query, $search_params);
 		
 		if($search_stmt === false){
-			die( print_r( sqlsrv_errors(), true));
 			die('<script>alert("'.$search_err.'")</script>');
 		}
 		
@@ -321,6 +320,9 @@
 					$num_noslash = str_replace('/','.',$numero);
 					$data_presentazione = $row['data_presentazione'];
 					$anno_presentazione = $data_presentazione->format("Y");
+					if($anno_presentazione = 0001){
+						$anno_presentazione = "Non datati";
+					}
 					$oggetto = $row['oggetto'];
 					
 					//Stampa delle variabili in tabella
