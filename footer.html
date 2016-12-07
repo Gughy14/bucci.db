@@ -1,0 +1,21 @@
+<div class="footer">
+  <div class="container">
+    <div class="row update">
+	  <?php
+	    if(isset($insert_time)){
+			echo('<p>Pratica inserita: '.$insert_time.'</p>');
+		}else{
+			echo('<p>Ultimo Aggiornamento: ');
+			print(time());
+			echo('</p>');
+		}
+	  ?>
+    </div>
+  </div>
+</div>
+
+</body>
+
+
+
+</html>
