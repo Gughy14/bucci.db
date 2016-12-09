@@ -44,6 +44,7 @@
 		$foglio = $row['foglio'];
 		$mappale = $row['mappale'];
 		$attID = $row['att'];
+		$timestamp = $row['timestamp'];
 	}
 	
 	//Definizione Variabili
@@ -196,6 +197,6 @@
 		");
 		
 		//Include pié di pagina
-		include 'D:/web/footer.html';
+		include 'D:/web/footer.php';
 	}
 ?>

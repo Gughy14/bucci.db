@@ -448,8 +448,9 @@
 																					subalterno,
 																					oggetto,
 																					loc,
-																					att)
-									VALUES (?,?,?,?,?,?,?,?,?,?,?);
+																					att,
+																					timestamp)
+									VALUES (?,?,?,?,?,?,?,?,?,?,?,Getdate());
 									SELECT SCOPE_IDENTITY() as ID";
 		//Parametri di inserimento pratica
 		$dat_params = array(
@@ -483,7 +484,7 @@
           <div class="modal-header" style="background: #2E353C; padding:15px 15px;">
             <button type="button" class="close" style="color: #f0f0f0" data-dismiss="modal">&times;</button>
             <h3 style="color: #f0f0f0;"><center><span class="fa fa-check"></span> Pratica inserita con successo</center></h3>
-            <a href="'.$percorso_file.'atto.php">Visualizza</a></li>";
+            <a href="atto.php?id=0'.$ID.'">Visualizza</a></li>";
           </div>
         </div>
       </div>
@@ -494,4 +495,6 @@
 	}else{
 		//FA QUALCOSA SE LA CHIAVE E' ERRATA
 	}
+	//Include pié di pagina
+	include 'D:/web/footer.php';
 ?>
