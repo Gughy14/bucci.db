@@ -243,7 +243,7 @@
 		}
 		//------------------------------
 		
-		$search_query = "SELECT atto, numero, data_presentazione, oggetto
+		$search_query = "SELECT ID, atto, numero, data_presentazione, oggetto
 										FROM pratica.dat
 										JOIN pratica.loc
 										ON loc = locID
@@ -257,9 +257,6 @@
 										AND cognome LIKE ?
 										AND societa LIKE ?
 										";
-										
-										
-										
 		//Parametri di ricerca
 		$search_params = array(
 												$atto,
@@ -315,6 +312,7 @@
 				while($row = sqlsrv_fetch_array($search_stmt, SQLSRV_FETCH_ASSOC)){
 					
 					//Assegnazione ed elaborazione variabili
+					$ID = $row['ID'];
 					$atto = $row['atto'];
 					$numero = $row['numero'];
 					$num_noslash = str_replace('/','.',$numero);
@@ -329,7 +327,7 @@
 					echo("
             <tr>
               <td>
-	            <a href='../atti/".$anno_presentazione."/".$atto."_".$num_noslash."/atto.php'>
+	            <a href='atto.php?id=".$ID."'>
 	              <i class='fa fa-folder-open-o' aria-hidden='true'></i>
 	            </a>
 	          </td>

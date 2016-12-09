@@ -2,6 +2,7 @@
 	//CONFIGURAZIONI
 	$dbserver = "CORE-CJ84\sqlexpress";
 	$dbdata = array( "Database"=>"edilizia", "UID"=>"dbmaster", "PWD"=>"6X!PdYncts#n%-jP2PxR4wBN" );
+	$ID = $_GET['id'];
 	
 	//MESSAGGI DI ERRORE
 	$link_err = "Errore durante la connessione al database: controllare i parametri!";
@@ -44,7 +45,13 @@
 		$mappale = $row['mappale'];
 		$attID = $row['att'];
 	}
-		
+	
+	//Definizione Variabili
+	$num_noslash = str_replace('/','.',$numero);
+	$anno_presentazione = $data_presentazione->format("Y");
+	if($anno_presentazione = 0001){$anno_presentazione = "Non datati";}
+	$percorso = "../atti/".$anno_presentazione."/".$atto."_".$num_noslash."/";
+	
 	//Elaborazione e assegnazione valori da stampare per proprietà
 	if($cognome === 'X' AND $nome === 'X' AND $societa === 'X'){
 		$proprieta = "<span style='float: left'>Nessun riferimento di propriet&agrave; presente in database";
@@ -103,13 +110,13 @@
 				}
 			}
 		}
-
+		
 		//Assegna all'array file il valore da stampare per ogni allegato
 		$files['void'] = "<a href='/../imgs/void_key.png'>There's a void fissure!</a><br>";
-		$files['presentazione'] = "<a href='presentazione.".$atts['presentazione']."' target='_blank'>Modulo di presentazione</a><br>";
-		$files['inizio_lavori'] = "<a href='inizio_lavori.".$atts['inizio_lavori']."' target='_blank'>Comunicazione inizio lavori</a><br>";
-		$files['relazione_tec'] = "<a href='relazione_tecnica.".$atts['relazione_tec']."' target='_blank'>Relazione Tecnica</a><br>";
-		$files['rilascio'] = "<a href='rilascio.".$atts['rilascio']."' target='_blank'>Rilascio</a><br>";
+		$files['presentazione'] = "<a href='".$percorso."presentazione.".$atts['presentazione']."' target='_blank'>Modulo di presentazione</a><br>";
+		$files['inizio_lavori'] = "<a href='".$percorso."inizio_lavori.".$atts['inizio_lavori']."' target='_blank'>Comunicazione inizio lavori</a><br>";
+		$files['relazione_tec'] = "<a href='".$percorso."relazione_tec.".$atts['relazione_tec']."' target='_blank'>Relazione Tecnica</a><br>";
+		$files['rilascio'] = "<a href='".$percorso."rilascio.".$atts['rilascio']."' target='_blank'>Rilascio</a><br>";
 		
 		//Associa il valore da stampare alla presenza dell'allegato
 		$allegati = array_combine($files, $vals);

@@ -168,7 +168,7 @@
 						<label for="cognome">Cognome</label>
 						<input type="text" name="cognome" class="form-control">
 					</div>
-					<div class="form-group col-sm-4"><!-- societa -->
+					<div class="form-group col-sm-4"><!-- Società -->
 						<label for="societa">Societ&agrave;</label>
 						<input type="text" name="societa" class="form-control">
 					</div>
@@ -186,8 +186,11 @@
 			</div>
 			<div class="panel-body"><!-- Corpo del Pannello -->
 			<?php
+				//Controlla lista allegati in config
 				foreach($allegabili as $allegato => $desc){
+					//Imposta il valore NULL come default 
 					$$allegato = NULL;
+					//Stampa la sezione di caricamento
 					print('
 								<div class="col-lg-6 col-sm-5 col-10">
 									<span class="help-block">'.$desc.'
@@ -342,8 +345,6 @@
 				}
 			}
 		}
-
-		
 		
 		//================================//
 		//=== INSERIMENTO IN DATABASE  ===//
@@ -490,14 +491,6 @@
 			';
 			echo '<script>$("#modalSuccess").modal();</script>';
 		}
-		//------------------------------
-		
-		//CREAZIONE PAGINA DI COPERTINA
-		$cover_atto = fopen($percorso_file."atto.php", "w") or die('<script>alert("'.$index_err.'")</script>');
-		$cover_content = "<?php	\$ID = ".$ID.";	include 'D:/web/atto.php';?>";
-		fwrite($cover_atto, $cover_content);
-		fclose($cover_atto);
-
 	}else{
 		//FA QUALCOSA SE LA CHIAVE E' ERRATA
 	}
