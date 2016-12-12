@@ -2,7 +2,6 @@
 
 	//CONFIGURAZIONI
 	$dbserver = "CORE-CJ84\sqlexpress";
-	$dbdata = array( "Database"=>"edilizia", "UID"=>"dbmaster", "PWD"=>"6X!PdYncts#n%-jP2PxR4wBN" );
 	$chiave = "chiave";
 	$anno0 = 1946; /*Anno minimo di selezione*/
 	
@@ -237,6 +236,13 @@
 		}
 		
 		//STABILIMENTO CONNESSIONE AL DATABASE
+		
+		//Ottenimento credenziali da JSON
+		$pass_json = file_get_contents('conf/pass.json');
+		$pass_data = json_decode($pass_json, true);
+		
+		$dbdata = $pass_data['dbmaster'];
+		
 		$link = sqlsrv_connect($dbserver, $dbdata);
 		if($link === false){
 			die('<script>alert("'.$link_err.'")</script>');

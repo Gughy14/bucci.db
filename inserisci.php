@@ -7,7 +7,6 @@
 	
 	//CONFIGURAZIONI
 	$dbserver = "CORE-CJ84\sqlexpress";
-	$dbdata = array( "Database"=>"edilizia", "UID"=>"dbmaster", "PWD"=>"6X!PdYncts#n%-jP2PxR4wBN" );
 	$chiave = "chiave";
 	$max_att_size = 10*MB;
 	
@@ -349,6 +348,12 @@
 		//================================//
 		//=== INSERIMENTO IN DATABASE  ===//
 		//================================//
+		
+		//Ottenimento credenziali da JSON
+		$pass_json = file_get_contents('conf/pass.json');
+		$pass_data = json_decode($pass_json, true);
+		
+		$dbdata = $pass_data['dbmaster'];
 		
 		//STABILIMENTO CONNESSIONE AL DATABASE
 		$link = sqlsrv_connect($dbserver, $dbdata);

@@ -1,13 +1,18 @@
 <?php
 	//CONFIGURAZIONI
 	$dbserver = "CORE-CJ84\sqlexpress";
-	$dbdata = array( "Database"=>"edilizia", "UID"=>"dbmaster", "PWD"=>"6X!PdYncts#n%-jP2PxR4wBN" );
 	$ID = $_GET['id'];
 	
 	//MESSAGGI DI ERRORE
 	$link_err = "Errore durante la connessione al database: controllare i parametri!";
 	$display_err = "Errore durante il ricevimento dei dati.";
 	$att_err = "Errore durante il ricevimento dei dati.";
+	
+	//Ottenimento credenziali da JSON
+	$pass_json = file_get_contents('conf/pass.json');
+	$pass_data = json_decode($pass_json, true);
+	
+	$dbdata = $pass_data['dbmaster'];
 	
 	//STABILIMENTO CONNESSIONE AL DATABASE
 	$link = sqlsrv_connect($dbserver, $dbdata);

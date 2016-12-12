@@ -10,12 +10,12 @@
 				//Stampa il valore di footer
 				print('<p>Inserimento pratica: '.$insert_date.'</p>');
 			}else{
-				//Dichiara i file contenenti valori provvisori (da rendere JSON!)
-				$time = 'conf/time.txt';
-				$update = 'conf/update.txt';
+				//Apre e decodifica il file contenente i valori temporali
+				$time_json = file_get_contents('conf/time.json');
+				$time_data = json_decode($time_json, true);
 				
 				//Ottieni timestamp ultima esecuzione
-				$lastexec = file_get_contents($time);
+				$lastexec = $time_data['last_exec'];
 				
 				//Controlla se è passato il tempo richiesto
 				if(time() >= $lastexec + (150)){
@@ -52,21 +52,27 @@
 					//Converte la data in formato datetime
 					$commitdatetime = new DateTime($commitdate);
 					//Codifica la data in gg.mm.yy hh:mm:ss UTC
-					$last_commit = $commitdatetime->format('d.m.Y H:i:s').' UTC';
-					//Carica la data nel file
-					file_put_contents($update, $last_commit);
+					$lastcommit = $commitdatetime->format('d.m.Y H:i:s').' UTC';
+					//Aggiorna il valore dell'ultimo commit
+					$time_data['last_commit'] = $lastcommit;
 					
 					//Ottieni il timestamp ultima esecuzione
 					$lastexec = time();
+					//Aggiorna il timestamp ultima esecuzione
+					$time_data['last_exec'] = $lastexec;
+					//Ricodifica l'array in JSON
+					$time_json = json_encode($time_data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 					
-					//Aggiorna il timestamp nel file
-					file_put_contents($time, $lastexec);
+					//Carica i dati nel file
+					$fp = fopen('conf/time.json', 'w');
+					fwrite($fp, $time_json);
+					fclose($fp);
 				}else{
-					//Ottiene l'ultimo commit tramite valore in file
-					$last_commit = file_get_contents($update);
+					//Ottieni l'ultimo commit tramite JSON
+					$lastcommit = $time_data['last_commit'];
 				}
 				//Stampa in entrambi i casi il footer
-				echo('<p>Ultimo Aggiornamento: '.$last_commit.'</p>');
+				echo('<p>Ultimo Aggiornamento: '.$lastcommit.'</p>');
 			}
 	  ?>
     </div>
