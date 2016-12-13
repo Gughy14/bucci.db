@@ -64,7 +64,7 @@
 	</script>
 <?php
 		//Include barra di navigazione
-		include '/topbar.html';
+		include 'part/topbar.php';
 ?>
 
 <div class="full-width" style="margin-top: 34px; background: #11283b; min-height: 125px;"><!-- Cover -->

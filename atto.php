@@ -144,7 +144,7 @@
 		//================================//
 				
 		//Include barra di navigazione
-		include '/topbar.html';
+		include 'part/topbar.php';
 		
 		//Intestazione della pratica
 		echo("
