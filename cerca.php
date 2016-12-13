@@ -1,19 +1,27 @@
-<?php /* CONFIGURAZIONI, LOCALIZZAZIONI E COSTANTI*/
-
+<?php
+	//Include Intestazione
+	include 'part/head.php';
+	
 	//CONFIGURAZIONI
-	$dbserver = "CORE-CJ84\sqlexpress";
 	$chiave = "chiave";
-	$anno0 = 1946; /*Anno minimo di selezione*/
+	$anno0 = 1946;
+	$dbdata = $pass_data['dbmaster'];
 	
 	//MESSAGGI DI ERRORE
-	$link_err = "Errore durante la connessione al database: controllare i parametri!";
 	$search_err = "Errore durante la ricerca dei dati.";
+	
+	//Controllo livello di autorizzazione
+	if(isset($_SESSION['livello'])){
+		if($_SESSION['livello'] == 2){
+				//Codice di errore permessi
+				die("NON AUTORIZZATO");
+		}
+	}else{
+		//Codice di mancata autenticazione
+		die("ACCESSO NEGATO");
+	}
 ?>
-
-<?php /* INTESTAZIONE HTML */
-	include 'head.html';
-?>
-	<script><!-- SortRows -->
+	<script>
 		function sortTable(table, col, reverse) {
 			var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
 					tr = Array.prototype.slice.call(tb.rows, 0), // put rows into array
@@ -54,9 +62,9 @@
 			}
 		}
 	</script>
-	
-	<?php /* CHIUSURA INTESTAZIONE & TOPBAR */
-	include 'topbar.html';
+<?php
+		//Include barra di navigazione
+		include '/topbar.html';
 ?>
 
 <div class="full-width" style="margin-top: 34px; background: #11283b; min-height: 125px;"><!-- Cover -->
@@ -236,13 +244,7 @@
 		}
 		
 		//STABILIMENTO CONNESSIONE AL DATABASE
-		
-		//Ottenimento credenziali da JSON
-		$pass_json = file_get_contents('conf/pass.json');
-		$pass_data = json_decode($pass_json, true);
-		
-		$dbdata = $pass_data['dbmaster'];
-		
+				
 		$link = sqlsrv_connect($dbserver, $dbdata);
 		if($link === false){
 			die('<script>alert("'.$link_err.'")</script>');
@@ -265,19 +267,18 @@
 										";
 		//Parametri di ricerca
 		$search_params = array(
-												$atto,
-												$numero,
-												$anno_presentazione,
-												$anno_rilascio,
-												$indirizzo,
-												$civico,
-												$nome,
-												$cognome,
-												$societa
-												);
+														$atto,
+														$numero,
+														$anno_presentazione,
+														$anno_rilascio,
+														$indirizzo,
+														$civico,
+														$nome,
+														$cognome,
+														$societa
+													);
 		//Esecuzione inserimento loc
 		$search_stmt = sqlsrv_query($link, $search_query, $search_params);
-		
 		if($search_stmt === false){
 			die('<script>alert("'.$search_err.'")</script>');
 		}
@@ -360,4 +361,4 @@
 			");
 	}
 ?>
-<?php include 'footer.php';?>
+<?php include 'part/footer.php';?>

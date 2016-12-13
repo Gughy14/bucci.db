@@ -1,19 +1,21 @@
 <?php
+	//Include Intestazione
+	include 'part/head.php';
+	
 	//CONFIGURAZIONI
-	$dbserver = "CORE-CJ84\sqlexpress";
 	$ID = $_GET['id'];
+	$dbdata = $pass_data['dbmaster'];
 	
 	//MESSAGGI DI ERRORE
-	$link_err = "Errore durante la connessione al database: controllare i parametri!";
 	$display_err = "Errore durante il ricevimento dei dati.";
 	$att_err = "Errore durante il ricevimento dei dati.";
 	
-	//Ottenimento credenziali da JSON
-	$pass_json = file_get_contents('conf/pass.json');
-	$pass_data = json_decode($pass_json, true);
-	
-	$dbdata = $pass_data['dbmaster'];
-	
+	//Controllo livello di autorizzazione
+	if(!isset($_SESSION['livello'])){
+		//Codice di mancata autenticazione
+		die("ACCESSO NEGATO");
+	}
+		
 	//STABILIMENTO CONNESSIONE AL DATABASE
 	$link = sqlsrv_connect($dbserver, $dbdata);
 	if($link === false){
@@ -49,7 +51,7 @@
 		$foglio = $row['foglio'];
 		$mappale = $row['mappale'];
 		$attID = $row['att'];
-		$timestamp = $row['timestamp'];
+		$insertstamp = $row['insertstamp'];
 	}
 	
 	//Definizione Variabili
@@ -71,6 +73,15 @@
 		$proprieta = "<span style='float: left'>Propriet&agrave;: </span><span style='float: right'><i class='fa fa-users' aria-hidden='true'></i> ".$societa."</span>";
 	}else{
 		$proprieta = "<span style='float: left'>Propriet&agrave;: </span><span style='float: right'><i class='fa fa-user' aria-hidden='true'></i> ".$cognome." ".$nome." &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class='fa fa-users' aria-hidden='true'></i> ".$societa."</span>";
+	}
+	
+	//Elaborazione e assegnazione valoru da stampare per indirizzo
+	if($indirizzo === 'X' AND $civico === 'X'){
+		$stradali = "<span style='float: left'>Nessun indirizzo presente in database";
+	}elseif($indirizzo !== 'X' AND $civico === 'X'){
+		$stradali = '<span style="float: left">Indirizzo: </span><span style="float: right">'.$indirizzo.'</span>';
+	}else{
+		$stradali = '<span style="float: left">Indirizzo: </span><span style="float: right">'.$indirizzo.', '.$civico.'</span>';
 	}
 	
 	//Elaborazione e assegnazione valori da stampare per dati catastali
@@ -131,12 +142,9 @@
 		//================================//
 		//===      STAMPA PAGINA       ===//
 		//================================//
-		
-		//Include Intestazione HTML
-		include 'D:/web/head.html';
-		
-		//Include barra superiore di navigazione
-		include 'D:/web/topbar.html';
+				
+		//Include barra di navigazione
+		include '/topbar.html';
 		
 		//Intestazione della pratica
 		echo("
@@ -160,7 +168,7 @@
 					<div class='panel-body cover'>
 						<h4>".$proprieta."</h4>
 						<br>
-						<h4><span style='float: left'>Indirizzo: </span><span style='float: right'>".$indirizzo.", ".$civico."</span></h4>
+						<h4>".$stradali."</h4>
 						<br>
 						<h4>".$catastali."</h4>
 					</div>
@@ -202,6 +210,6 @@
 		");
 		
 		//Include pié di pagina
-		include 'D:/web/footer.php';
+		include 'part/footer.php';
 	}
 ?>

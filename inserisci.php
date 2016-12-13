@@ -1,17 +1,13 @@
-<?php /* CONFIGURAZIONI, LOCALIZZAZIONI E COSTANTI*/
-  
-	//COSTANTI
-	define('KB', 1024);
-	define('MB', 1048576);
-	define('GB', 1073741824);
+<?php
+	//Include Intestazione
+	include 'part/head.php';
 	
 	//CONFIGURAZIONI
-	$dbserver = "CORE-CJ84\sqlexpress";
 	$chiave = "chiave";
 	$max_att_size = 10*MB;
+	$dbdata = $pass_data['dbmaster'];
 	
 	//MESSAGGI DI ERRORE
-	$link_err = "Errore durante la connessione al database: controllare i parametri!";
 	$null_act = "Il numero di atto non può essere omesso";
 	$att_err = "Si è verificato un errore durante l'inserimento degli allegati in database";
 	$hash_err = "Errore durante la comparazione dell'hash";
@@ -27,10 +23,17 @@
 										"relazione_tec" => "Relazione Tecnica" ,
 										"rilascio" => "Documento di Rilascio"
 										);
-?>
-
-<?php /* INTESTAZIONE HTML */
-	include 'head.html';
+										
+	//Controllo livello di autorizzazione
+	if(isset($_SESSION['livello'])){
+		if($_SESSION['livello'] > 2){
+				//Codice di errore permessi
+				die("NON AUTORIZZATO");
+		}
+	}else{
+		//Codice di mancata autenticazione
+		die("ACCESSO NEGATO");
+	}
 ?>
 
 	<script><!-- Ritorno nome file caricato -->
@@ -72,8 +75,9 @@
     });
   </script>
 	
-	<?php /* CHIUSURA INTESTAZIONE & TOPBAR */
-	include 'topbar.html';
+<?php
+	//Include barra di navigazione
+	include '/topbar.html';
 ?>
 
 <div class="full-width" style="margin-top: 34px; background: #11283b; min-height: 125px;"><!-- Cover -->
@@ -286,12 +290,12 @@
 		
 		//Valori pratica.loc
 		if(empty($_POST['indirizzo'])){
-			$indirizzo = "Non Specificato";
+			$indirizzo = "X";
 		}else{
 			$indirizzo = $_POST['indirizzo'];
 		}
 		if(empty($_POST['civico'])){
-			$civico = "NonSpec";
+			$civico = "X";
 		}else{
 			$civico = $_POST['civico'];
 		}
@@ -348,12 +352,7 @@
 		//================================//
 		//=== INSERIMENTO IN DATABASE  ===//
 		//================================//
-		
-		//Ottenimento credenziali da JSON
-		$pass_json = file_get_contents('conf/pass.json');
-		$pass_data = json_decode($pass_json, true);
-		
-		$dbdata = $pass_data['dbmaster'];
+	
 		
 		//STABILIMENTO CONNESSIONE AL DATABASE
 		$link = sqlsrv_connect($dbserver, $dbdata);
@@ -454,7 +453,7 @@
 																					oggetto,
 																					loc,
 																					att,
-																					timestamp)
+																					insertstamp)
 									VALUES (?,?,?,?,?,?,?,?,?,?,?,Getdate());
 									SELECT SCOPE_IDENTITY() as ID";
 		//Parametri di inserimento pratica
@@ -489,7 +488,7 @@
           <div class="modal-header" style="background: #2E353C; padding:15px 15px;">
             <button type="button" class="close" style="color: #f0f0f0" data-dismiss="modal">&times;</button>
             <h3 style="color: #f0f0f0;"><center><span class="fa fa-check"></span> Pratica inserita con successo</center></h3>
-            <a href="atto.php?id=0'.$ID.'">Visualizza</a></li>";
+            <a href="atto.php?id='.$ID.'">Visualizza</a></li>";
           </div>
         </div>
       </div>
@@ -501,5 +500,5 @@
 		//FA QUALCOSA SE LA CHIAVE E' ERRATA
 	}
 	//Include pié di pagina
-	include 'D:/web/footer.php';
+	include 'part/footer.php';
 ?>
