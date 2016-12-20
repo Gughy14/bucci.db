@@ -7,9 +7,15 @@
 				if(isset($insertstamp)){
 					//Converte il timestamp in formato data
 					$insert_date = $insertstamp->format('d.m.Y H:i:s');
+					if(isset($editstamp)){
+						$edit_date  = "Ultima modifica: "; 
+						$edit_date .= $editstamp->format('d.m.Y H:i:s');
+					}else{
+						$edit_date = NULL;
+					}
 					
 					//Stampa il valore di footer
-					print('<p>Inserimento pratica: '.$insert_date.'</p>');
+					print('<p>Inserimento pratica: '.$insert_date.'<span style="float:right;">'.$edit_date.'</span></p>');
 				}else{
 					//Apre e decodifica il file contenente i valori temporali
 					$time_json = file_get_contents('conf/time.json');

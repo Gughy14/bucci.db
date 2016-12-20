@@ -10,12 +10,12 @@
           <div class="col-md-12 tb-right">
             <div id="top-nav">
 				<?php if(!isset($_SESSION['livello'])){ ?>
-								<div class="pull-right nav">
-									<a href="" class="quick-nav">
-										<i class="fa"></i>
-										<span class="hidden-xs"></span>
-									</a>
-								</div>
+									<div class="pull-left nav">
+										<a href="" class="quick-nav">
+											<i class="fa"></i>
+											<span class="hidden-xs"></span>
+										</a>
+									</div>
 				<?php }else{
 								if($_SESSION['livello'] == 3){ ?>
 									<div class="pull-left nav">

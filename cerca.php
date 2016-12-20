@@ -1,14 +1,9 @@
 <?php
+	//Definisce la directory base del sito
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	
 	//Include Intestazione
-	include 'part/head.php';
-	
-	//CONFIGURAZIONI
-	$chiave = "chiave";
-	$anno0 = 1946;
-	$dbdata = $pass_data['dbmaster'];
-	
-	//MESSAGGI DI ERRORE
-	$search_err = "Errore durante la ricerca dei dati.";
+	include $path.'/part/head.php';
 	
 	//Controllo livello di autorizzazione
 	if(isset($_SESSION['livello'])){
@@ -64,7 +59,7 @@
 	</script>
 <?php
 		//Include barra di navigazione
-		include 'part/topbar.php';
+		include $path.'/part/topbar.php';
 ?>
 
 <div class="full-width" style="margin-top: 34px; background: #11283b; min-height: 125px;"><!-- Cover -->
@@ -87,7 +82,7 @@
 </div>
 
 <section style="background: #f0f0f0;" class="full-width form"><!-- Form ricerca dati-->
-	<form action="cerca.php?<?php print($chiave); ?>" method="post" class="container">
+	<form action="cerca.php?<?php echo($chiave); ?>" method="post" class="container">
 		<div class="panel panel-default"><!-- Pannello Dati -->
 			<div class="panel-heading"><!-- Intestazione Pannello -->
 				<h3 class="panel-title">Dati dell'atto</h3>
@@ -254,7 +249,7 @@
 		$search_query = "SELECT ID, atto, numero, data_presentazione, oggetto
 										FROM pratica.dat
 										JOIN pratica.loc
-										ON loc = locID
+										ON locID = IDloc
 										WHERE atto LIKE ?
 										AND numero LIKE ?
 										AND data_presentazione LIKE ?
@@ -361,4 +356,4 @@
 			");
 	}
 ?>
-<?php include 'part/footer.php';?>
+<?php include $path.'/part/footer.php';?>

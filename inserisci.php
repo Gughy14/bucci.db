@@ -1,29 +1,10 @@
 <?php
+	//Definisce la directory base del sito
+	$path = $_SERVER['DOCUMENT_ROOT'];
+	
 	//Include Intestazione
-	include 'part/head.php';
+	include $path.'/part/head.php';
 	
-	//CONFIGURAZIONI
-	$chiave = "chiave";
-	$max_att_size = 10*MB;
-	$dbdata = $pass_data['dbmaster'];
-	
-	//MESSAGGI DI ERRORE
-	$null_act = "Il numero di atto non può essere omesso";
-	$att_err = "Si è verificato un errore durante l'inserimento degli allegati in database";
-	$hash_err = "Errore durante la comparazione dell'hash";
-	$loc_err = "Errore durante l'inserimento dei dati di localizzazione";
-	$mkdir_failed = "Si è verificato un errore durante la creazione della cartella in archivio";
-	$size_err = "Impossibile caricare il file poiché di dimensioni superiori a ".str_replace('*','',$max_att_size)." bytes: ";
-	$index_err = "Si è verificato un errore durante la creazione della copertina della pratica";
-	
-	//ALLEGATI INSERIBILI
-	$allegabili = array(
-										"presentazione" => "Modulo di Presentazione" ,
-										"inizio_lavori" => "Comunicazione Inizio lavori" ,
-										"relazione_tec" => "Relazione Tecnica" ,
-										"rilascio" => "Documento di Rilascio"
-										);
-										
 	//Controllo livello di autorizzazione
 	if(isset($_SESSION['livello'])){
 		if($_SESSION['livello'] > 2){
@@ -36,28 +17,7 @@
 	}
 ?>
 
-	<script><!-- Ritorno nome file caricato -->
-	$(function(){
-		$(document).on('change', ':file', function(){
-			var input = $(this),
-			numFiles = input.get(0).files ? input.get(0).files.length : 1,
-			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-			input.trigger('fileselect', [numFiles, label]);
-		});
-		$(document).ready( function(){
-			$(':file').on('fileselect', function(event, numFiles, label){
-				var input = $(this).parents('.input-group').find(':text'),
-				log = numFiles > 1 ? numFiles + ' files selected' : label;
-				
-				if(input.length){
-					input.val(log);
-				}else{
-					if(log)alert(log);
-				}
-			});
-		});
-	});
-	</script>
+	<script src="/js/carica_file.js"></script><!-- Ritorno nome file caricato -->
 	<script><!-- datepicker -->
 		$(function() {
 			$("#data_presentazione").datepicker({
@@ -77,7 +37,7 @@
 	
 <?php
 	//Include barra di navigazione
-	include 'part/topbar.php';
+	include $path.'/part/topbar.php';
 ?>
 
 <div class="full-width" style="margin-top: 34px; background: #11283b; min-height: 125px;"><!-- Cover -->
@@ -100,7 +60,7 @@
 </div>
 
 <section style="background: #f0f0f0;" class="full-width form"><!-- Form di inserimento dati -->
-	<form action="inserisci.php?<?php print($chiave); ?>" method="post" enctype="multipart/form-data" class="container">
+	<form action="inserisci.php?<?php echo($chiave); ?>" method="post" enctype="multipart/form-data" class="container">
 		<div class="panel panel-default"><!-- Pannello Dati -->
 			<div class="panel-heading"><!-- Intestazione Pannello -->
 				<h3 class="panel-title">Dati della pratica</h3>
@@ -194,7 +154,7 @@
 					//Imposta il valore NULL come default 
 					$$allegato = NULL;
 					//Stampa la sezione di caricamento
-					print('
+					echo('
 								<div class="col-lg-6 col-sm-5 col-10">
 									<span class="help-block">'.$desc.'
 										<span style="float:right;" id="'.$allegato.'" onclick="rimuovifile(this.id)">Rimuovi &times;</span>
@@ -219,15 +179,6 @@
 		</div>
 	</form>
 </section>
-
-	<script><!-- Rimozione Allegati-->
-	function rimuovifile(clicked_id) {
-		var id = (clicked_id);
-		$("#"+id+"_up").replaceWith($("#"+id+"_up").val('').clone(true));
-		document.getElementById(id+"_label").value = "";
-	}
-	</script>
-
 
 <?php /* ELABORAZIONE INSERIMENTO */
 	//Controllo inserimento tramite invio e chiave
@@ -329,6 +280,9 @@
 						
 		//Elaborazione ricorsiva degli allegati
 		foreach($_FILES as $att => $file){
+			//Rimuove il suffisso "_up" dal nome
+			$att_trunc = str_replace('_up','',$att);
+			$$att_trunc = NULL;
 			//Controllo presenza file
 			if(!empty($file['name'])){
 				//Controllo dimensione file
@@ -336,14 +290,12 @@
 					die('<script>alert("'.$size_err.$file['name'].'")</script>');
 				}else{
 					//Attribuisce percorso ed estensione
-					$filename = $percorso_file.basename($file['name']);
+					$filename = $percorso.basename($file['name']);
 					$infofile = pathinfo($filename);
 					//Sposta il file in archivio
 					move_uploaded_file($file['tmp_name'], $filename);
-					//Rimuove il suffisso "_up" dal nome
-					$att_trunc = str_replace('_up','',$att);
 					//Rinomina il file in base alla categoria
-					rename($filename, $percorso_file.$att_trunc.".".$infofile['extension']);
+					rename($filename, $percorso.$att_trunc.".".$infofile['extension']);
 					$$att_trunc = $infofile['extension'];
 				}
 			}
@@ -368,7 +320,7 @@
 																					relazione_tec,
 																					rilascio)
 								VALUES (?, ?, ?, ?);
-								SELECT SCOPE_IDENTITY() as attID";
+								SELECT SCOPE_IDENTITY() as IDatt";
 		//Parametri di inserimento allegati
 		$att_params = array(
 												$presentazione,
@@ -382,10 +334,10 @@
 		if($att_stmt === false){
 			die('<script>alert("'.$att_err.'")</script>');
 		}else{
-			//Ottenimento attID
+			//Ottenimento IDatt
 			sqlsrv_next_result($att_stmt);
 			sqlsrv_fetch($att_stmt);
-			$attID = sqlsrv_get_field($att_stmt, 0);
+			$IDatt = sqlsrv_get_field($att_stmt, 0);
 		}
 		//------------------------------
 		
@@ -394,7 +346,7 @@
 		$loc = $indirizzo."&".$civico."_".$foglio."&".$mappale;
 		$locmd5 = md5($loc);
 		//Query di controllo hash
-		$hash_query = "SELECT locID
+		$hash_query = "SELECT IDloc
 									FROM pratica.loc
 									WHERE hash = ? ";
 		//Statement di controllo hash + parametri
@@ -405,9 +357,9 @@
 		}else{
 			//Se l'hash è già presente
 			if(sqlsrv_has_rows($hash_stmt) === true){
-				//Ottieni il locID corrispondente
+				//Ottieni il IDloc corrispondente
 				sqlsrv_fetch($hash_stmt);
-				$locID = sqlsrv_get_field($hash_stmt, 0);
+				$IDloc = sqlsrv_get_field($hash_stmt, 0);
 			//Se l'hash non è presente, inserisci la nuova loc
 			}else{
 				//Query di inserimento loc
@@ -417,7 +369,7 @@
 																							mappale,
 																							hash)
 											VALUES (?,?,?,?,?);
-											SELECT SCOPE_IDENTITY() as locID";
+											SELECT SCOPE_IDENTITY() as IDloc";
 				//Parametri di inserimento loc
 				$loc_params = array(
 												$indirizzo,
@@ -431,10 +383,10 @@
 				if($loc_stmt === false){
 					die('<script>alert("'.$loc_err.'")</script>');
 				}else{
-					//Ottenimento locID su nuovo inserimento
+					//Ottenimento IDloc su nuovo inserimento
 					sqlsrv_next_result($loc_stmt);
 					sqlsrv_fetch($loc_stmt);
-					$locID = sqlsrv_get_field($loc_stmt, 0);
+					$IDloc = sqlsrv_get_field($loc_stmt, 0);
 				}
 			}
 		}
@@ -451,8 +403,8 @@
 																					societa,
 																					subalterno,
 																					oggetto,
-																					loc,
-																					att,
+																					locID,
+																					attID,
 																					insertstamp)
 									VALUES (?,?,?,?,?,?,?,?,?,?,?,Getdate());
 									SELECT SCOPE_IDENTITY() as ID";
@@ -467,14 +419,14 @@
 												$societa,
 												$subalterno,
 												$oggetto,
-												$locID,
-												$attID
+												$IDloc,
+												$IDatt
 												);
 		//Statement di inserimento dati
 		$dat_stmt = sqlsrv_query($link, $dat_query, $dat_params);
 		//Esecuzione inserimento dati
 		if($dat_stmt === false){
-			die( print_r( sqlsrv_errors(), true));
+			die( echo_r( sqlsrv_errors(), true));
 		}else{
 			//Ottenimento ID
 			sqlsrv_next_result($dat_stmt); 
@@ -500,5 +452,5 @@
 		//FA QUALCOSA SE LA CHIAVE E' ERRATA
 	}
 	//Include pié di pagina
-	include 'part/footer.php';
+	include $path.'/part/footer.php';
 ?>
