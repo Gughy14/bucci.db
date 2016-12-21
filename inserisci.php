@@ -7,7 +7,7 @@
 	
 	//Controllo livello di autorizzazione
 	if(isset($_SESSION['livello'])){
-		if($_SESSION['livello'] > 2){
+		if($_SESSION['livello'] > 1){
 				//Codice di errore permessi
 				die("NON AUTORIZZATO");
 		}
@@ -53,9 +53,9 @@
 </div>
 <div class="full-width" style="background: #0971aa;"><!-- Banner -->
 	<div class="container">
-		<a href="placeholder" style="text-decoration: none;">
+		<div style="text-decoration: none;">
 			<center><h4 style="color: #f0f0f0;">Aggiungi un nuovo atto al database, compilando i campi sottostanti</h4></center>
-		</a>
+		</div>
 	</div>
 </div>
 
@@ -426,7 +426,7 @@
 		$dat_stmt = sqlsrv_query($link, $dat_query, $dat_params);
 		//Esecuzione inserimento dati
 		if($dat_stmt === false){
-			die( echo_r( sqlsrv_errors(), true));
+			die( print_r( sqlsrv_errors(), true));
 		}else{
 			//Ottenimento ID
 			sqlsrv_next_result($dat_stmt); 

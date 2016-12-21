@@ -113,7 +113,7 @@
 			//Esclude il risultato numerico dell'ID
 			if(!is_numeric($estensione)){
 				//Attribuisce la linea da stampare per ogni allegato
-				$files[$tipo] = "<a href='$percorso/$tipo.$estensione' target='_blank'>$allegabili[$tipo]</a><br>";
+				$files[$tipo] = "<a href='$percorso$tipo.$estensione' target='_blank'>$allegabili[$tipo]</a><br>";
 				//Attribuisce il valore 0 se nullo
 				if(is_null($estensione)){
 					$presente[$tipo] =  0;
@@ -127,69 +127,38 @@
 	
 	//Associa il valore da stampare alla presenza dell'allegato
 	$allegati = array_combine($files, $presente);
-			
-	//Modifica gli allegati della pratica
-	if(isset($_POST['att-submit']) && isset($_GET['id'])){
-		//Controllo esistenza
-		if(!file_exists($percorso)){
-			//Creazione Cartella
-			if(!mkdir($percorso, 0777, true)){
-				die('<script>alert("'.$mkdir_failed.'")</script>');
-			}
+	
+	
+	//================================//
+	//===     MODIFICA TITOLO      ===//
+	//================================//
+	
+	if(isset($_POST['tit-submit']) && isset($_GET['id'])){
+		//Lettura dell'oggetto
+		if(empty($_POST['oggetto'])){
+			$oggetto = "Nessun Oggetto";
+		}else{
+			$oggetto = $_POST['oggetto'];
 		}
 		
-		//Elaborazione ricorsiva degli allegati
-		foreach($_FILES as $att => $file){
-			//Controllo presenza file
-			if(!empty($file['name'])){
-				//Controllo dimensione file
-				if($file['size'] > $max_att_size){
-					die('<script>alert("'.$size_err.$file['name'].'")</script>');
-				}else{
-					//Rimuove il suffisso "_up" dal nome
-					$att_trunc = str_replace('_up','',$att);
-					
-					//Rimuove il vecchio file se presente
-					if(file_exists($percorso.$att_trunc.".".$$att_trunc)){
-						unlink($percorso.$att_trunc.".".$$att_trunc);
-					}
-
-					//Attribuisce percorso ed estensione
-					$filename = $percorso.basename($file['name']);
-					$infofile = pathinfo($filename);
-					
-					//Sposta il file in archivio
-					move_uploaded_file($file['tmp_name'], $filename);
-					//Rinomina il file in base alla categoria
-					rename($filename, $percorso.$att_trunc.".".$infofile['extension']);
-					$$att_trunc = $infofile['extension'];					
-				}
-			}
-		}
-				
-		//INSERIMENTO ALLEGATI
-		//Query di inserimento allegati
-		$att_query = "UPDATE pratica.att
-									SET presentazione=(?), inizio_lavori=(?), relazione_tec=(?), rilascio=(?)
-									WHERE IDatt=$attID";
-
-		//Parametri di inserimento allegati
-		$att_params = array(
-												$presentazione,
-												$inizio_lavori,
-												$relazione_tec,
-												$rilascio
-												);
-		//Statement di inserimento allegati
-		$att_stmt = sqlsrv_query($link, $att_query, $att_params);
-		//Esecuzione inserimento allegati
-		if($att_stmt === false){
-			die('<script>alert("'.$att_err.'")</script>');
-		}
-		header("Refresh:0");
+	$tit_query = "UPDATE pratica.dat 
+								SET oggetto=(?), editstamp=Getdate()
+								WHERE ID=".$ID;
+		
+	$tit_params = array($oggetto);
+	
+	//Statement di inserimento dati
+	$tit_stmt = sqlsrv_query($link, $tit_query, $tit_params);
+	if($tit_stmt === false){
+		die(print_r( sqlsrv_errors(), true));
 	}
-			
-	//Modifica i dati della pratica
+	header("Refresh:0");
+	}
+	
+	//================================//
+	//===      MODIFICA DATI       ===//
+	//================================//
+	
 	if(isset($_POST['dat-submit']) && isset($_GET['id'])){
 		//Lettura valori form
 		if(empty($_POST['nome'])){
@@ -287,16 +256,80 @@
 									SET nome=(?), cognome=(?), societa=(?), subalterno=(?), locID=(?), editstamp=Getdate()
 									WHERE ID=".$ID;
 		
-		$dat_params = array($nome, $cognome, $societa, $subalterno, $IDloc, $editstamp);
+		$dat_params = array($nome, $cognome, $societa, $subalterno, $IDloc);
 		
 		//Statement di inserimento dati
 		$dat_stmt = sqlsrv_query($link, $dat_query, $dat_params);
 		if($dat_stmt === false){
-			die( echo_r( sqlsrv_errors(), true));
+			die( print_r( sqlsrv_errors(), true));
 		}
 		header("Refresh:0");
 	}
-			
+	
+	//================================//
+	//===    MODIFICA ALLEGATI     ===//
+	//================================//
+	
+	if(isset($_POST['att-submit']) && isset($_GET['id'])){
+		//Controllo esistenza
+		if(!file_exists($percorso)){
+			//Creazione Cartella
+			if(!mkdir($percorso, 0777, true)){
+				die('<script>alert("'.$mkdir_failed.'")</script>');
+			}
+		}
+		
+		//Elaborazione ricorsiva degli allegati
+		foreach($_FILES as $att => $file){
+			//Controllo presenza file
+			if(!empty($file['name'])){
+				//Controllo dimensione file
+				if($file['size'] > $max_att_size){
+					die('<script>alert("'.$size_err.$file['name'].'")</script>');
+				}else{
+					//Rimuove il suffisso "_up" dal nome
+					$att_trunc = str_replace('_up','',$att);
+					
+					//Rimuove il vecchio file se presente
+					if(file_exists($percorso.$att_trunc.".".$$att_trunc)){
+						unlink($percorso.$att_trunc.".".$$att_trunc);
+					}
+
+					//Attribuisce percorso ed estensione
+					$filename = $percorso.basename($file['name']);
+					$infofile = pathinfo($filename);
+					
+					//Sposta il file in archivio
+					move_uploaded_file($file['tmp_name'], $filename);
+					//Rinomina il file in base alla categoria
+					rename($filename, $percorso.$att_trunc.".".$infofile['extension']);
+					$$att_trunc = $infofile['extension'];					
+				}
+			}
+		}
+				
+		//INSERIMENTO ALLEGATI
+		//Query di inserimento allegati
+		$att_query = "UPDATE pratica.att
+									SET presentazione=(?), inizio_lavori=(?), relazione_tec=(?), rilascio=(?)
+									WHERE IDatt=$attID";
+
+		//Parametri di inserimento allegati
+		$att_params = array(
+												$presentazione,
+												$inizio_lavori,
+												$relazione_tec,
+												$rilascio
+												);
+		//Statement di inserimento allegati
+		$att_stmt = sqlsrv_query($link, $att_query, $att_params);
+		//Esecuzione inserimento allegati
+		if($att_stmt === false){
+			die('<script>alert("'.$att_err.'")</script>');
+		}
+		header("Refresh:0");
+	}
+	
 	//================================//
 	//===      STAMPA PAGINA       ===//
 	//================================//
@@ -304,32 +337,80 @@
 	//Include barra di navigazione
 	include $path.'/part/topbar.php';
 	
-	//Intestazione della pratica
+	//Stampa l'intestazione della pratica
 	echo("
 	<div class='full-width' style='margin-top: 34px; background: #11283b; min-height: 190px;'>
 		<div class='container' style='text-align: center;'>
+			");
+	
+	//Se l'utente ha i privilegi di modifica
+	if(isset($_SESSION['livello']) && ($_SESSION['livello'] == 1)){
+		//Stampa il pulsante di modifica dati
+		echo("
+			<a href='?id=$ID&mod=tit'>
+				<i class='fa fa-pencil-square-o' style='float:right; color: #f0f0f0; margin:10px 17px 0px 0px;' title='Modifica' aria-hidden='true'></i>
+			</a>
 			<h1 style='font-size: 60px; color: #f0f0f0;'>".$atto." &nbsp; ".$numero."</h1>
+				");
+	}
+	//Se è attivata la modifica del titolo
+	if(isset($_GET['mod']) && ($_GET['mod'] == "tit") && ($_SESSION['livello'] == 1)){
+		echo("
+			<form action='?id=$ID' method='post' enctype='multipart/form-data'>
+				<div class='form-group'><!-- Oggetto -->
+					<textarea name='oggetto' rows='4' cols='3' class='form-control' style='background: #11283b ;color: #f0f0f0;'>".$oggetto."</textarea>
+						<div style='text-align: center; margin: 10px auto;'><!-- Pannello Pulsanti -->
+							<input class='btn btn-primary' type='submit' name='tit-submit' value='Modifica'>
+							<input class='btn btn-default' type='reset' name='reset'>
+						</div>
+				</div>
+			</form>
+				");
+	//In caso contrario...
+	}else{
+		//Stampa il titolo
+		echo("
+			
 			<h4 style='color: #f0f0f0;'>".$oggetto."</h4>
+				");
+	}
+	//Stampa la chiusura del titolo
+	echo("
 		</div>
 	</div>
 	<div class='full-width' style='background: #38414A;'>&nbsp;</div>
 	");
 		
-	//Dati della pratica
+	//Stampa il pannello dati
 	echo("
 	<div class='full-width' style='background: #f0f0f0;'>
 		<div class='container'>
 			<div class='panel panel-default cover'>
 				<div class='panel-heading'>
 					<h3 class='panel-title'>Dati dell'atto");
-	if(isset($_SESSION['livello']) && ($_SESSION['livello']) <= 2){
-		echo("<span style='float: right;'><a href='?id=$ID&mod=dat'><i class='fa fa-pencil-square-o' title='Modifica' aria-hidden='true'></i></a></span>");
-	}
 	
-	if(isset($_GET['mod']) && ($_GET['mod'] == "dat")){
+	//Se l'utente ha i privilegi di modifica
+	if(isset($_SESSION['livello']) && ($_SESSION['livello'] == 1)){
+		//Stampa il pulsante di modifica dati
 		echo("
-					</div>
-					<div class='panel-body cover'>
+						<span style='float: right;'>
+							<a href='?id=$ID&mod=dat'>
+								<i class='fa fa-pencil-square-o' title='Modifica' aria-hidden='true'></i>
+							</a>
+						</span>
+				");
+	}
+	//Stampa la chiusra dell'intestazione e l'apertura del contenuto
+	echo("
+					</h3>
+				</div>
+				<div class='panel-body cover'>
+			");
+	
+	//Se è attivata la modifica dei dati
+	if(isset($_GET['mod']) && ($_GET['mod'] == "dat") && ($_SESSION['livello'] == 1)){
+		//Stampa l'area di modifica dati
+		echo("
 						<form action='?id=$ID' method='post' enctype='multipart/form-data'>
 							<div class='row'><!--Linea #4| Inerimento dati anagrafici -->
 								<div class='form-group col-sm-4'><!-- Nome -->
@@ -379,11 +460,11 @@
 			</div>
 		</div>
 		");
+	
+	//In caso contrario..
 	}else{
+		//Stampa l'area di visualizzazione dati
 		echo("
-						</h3>
-					</div>
-					<div class='panel-body cover'>
 						<h4>".$proprieta."</h4>
 						<br>
 						<h4>".$stradali."</h4>
@@ -396,38 +477,57 @@
 		");
 	}
 
-	//Allegati
+	//Stampa il pannello dati
 	echo("
 	<div class='full-width' style='background: #f0f0f0;'>
 		<div class='container'>
 			<div class='panel panel-default cover'>
 				<div class='panel-heading'>
 					<h3 class='panel-title'>Allegati");
-	
-	if(isset($_SESSION['livello']) && ($_SESSION['livello']) <= 2){
-		echo("<span style='float: right;'><a href='?id=$ID&mod=att'><i class='fa fa-pencil-square-o' title='Modifica' aria-hidden='true'></i></a></span>");
+
+	//Se l'utente ha i privilegi di modifica
+	if(isset($_SESSION['livello']) && ($_SESSION['livello'] == 1)){
+		//Stampa il pulsante di modifica dati
+		echo("
+						<span style='float: right;'>
+							<a href='?id=$ID&mod=att'>
+								<i class='fa fa-pencil-square-o' title='Modifica' aria-hidden='true'></i>
+							</a>
+						</span>");
 	}
+	//Stampa la chiusra dell'intestazione e l'apertura del contenuto
 	echo("
 					</h3>
 				</div>
 			<div class='panel-body cover'>
 			");
-			
-	if(isset($_GET['mod']) && ($_GET['mod'] == "att")){
-			
+	
+	//Se è attivata la modifica degli allegati
+	if(isset($_GET['mod']) && ($_GET['mod'] == "att") && ($_SESSION['livello'] == 1)){
+		//Stampa l'area di modifica dati
 		echo("
 					<form action='?id=$ID' method='post' enctype='multipart/form-data'>
 						<script src='/js/carica_file.js'></script>
+						<script>
+							function cestina(clicked_id){
+								var id = (clicked_id);
+								var ajaxurl = '/part/cestina.php';
+								data =  {'attID': '$attID', 'percorso': '$percorso', 'att': id};
+								$.post(ajaxurl, data, function (response){
+									$('#'+id+ '_label').val('Eliminato');
+								});
+							};
+						</script>
 						<div class='row'>
 					");
 		
-		//Controlla lista allegati in config
+		//Controlla lista allegati in config ed esegue per ogni elemento
 		foreach($allegabili as $allegato => $desc){
 			//Stampa la sezione di caricamento
 			echo('
 							<div class="form-group col-lg-6 col-sm-5 col-10">
 								<span class="help-block">'.$desc.'
-									<span style="float:right;" id="'.$allegato.'" onclick="rimuovifile(this.id)">Rimuovi &times;</span>
+									<span style="float:right;" id="'.$allegato.'" onclick="rimuovifile(this.id);cestina(this.id)">Rimuovi &times;</span>
 								</span>
 								<div class="input-group">
 									<label class="input-group-btn">
@@ -435,32 +535,39 @@
 											Carica&hellip; <input type="file" name="'.$allegato.'_up" id="'.$allegato.'_up" style="display: none;">
 										</span>
 									</label>
-									<input type="text" id="'.$allegato.'_label" class="form-control" readonly>
+									<input type="text" id="'.$allegato.'_label" class="form-control" value="'.$$allegato.'" readonly>
 								</div>
 							</div>
 						');
 		}
-		echo('
+			//Stampa la chiusura dell'area di modifica
+			echo('
 						</div>
 						<div style="text-align: center; margin: 10px auto;"><!-- Pannello Pulsanti -->
 							<input class="btn btn-primary" name="att-submit" value="Modifica" type="submit">
 						</div>			
 					</form>
 					');
+		
+		//In caso contrario...
 		}else{
-		//Verifica la presenza degli allegati
-		if(count(array_unique($presente)) !== 1){
-			//Se presente stampa la stringa attribuita per ogni file
-			foreach($allegati as $file => $val){
-				if($val==1){
-					echo($file);
+			//Se il file ha almeno 1 allegato
+			if(count(array_unique($presente)) !== 1){
+				//Per ognuno di essi...
+				foreach($allegati as $file => $val){
+					//Se è presente
+					if($val==1){
+						//Stampa il relativo collegamento
+						echo($file);
+					}
 				}
-			}
-		//In caso non ci siano file restituisce il seguente
-		}else{
-			echo("Nessun allegato presente");
+			//Altrimenti se non ce ne sono
+			}else{
+				//Stampa il seguente messaggio
+				echo("Nessun allegato presente");
+			}	
 		}
-	}
+	
 	//Stampa la chiusura della tabella allegati
 	echo("
 				</div>

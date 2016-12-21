@@ -7,7 +7,7 @@
 	
 	//Controllo livello di autorizzazione
 	if(isset($_SESSION['livello'])){
-		if($_SESSION['livello'] == 2){
+		if($_SESSION['livello'] > 2){
 				//Codice di errore permessi
 				die("NON AUTORIZZATO");
 		}
@@ -75,9 +75,9 @@
 </div>
 <div class="full-width" style="background: #0971aa;"><!-- Banner -->
 	<div class="container">
-		<a href="placeholder" style="text-decoration: none;">
+		<div style="text-decoration: none;">
 			<center><h4 style="color: #f0f0f0;">Consulta il database avviando una ricerca specifica, compilando i parametri desiderati</h4></center>
-		</a>
+		</div>
 	</div>
 </div>
 

@@ -17,31 +17,19 @@
 										</a>
 									</div>
 				<?php }else{
-								if($_SESSION['livello'] == 3){ ?>
+								if($_SESSION['livello'] <= 2){ ?>
 									<div class="pull-left nav">
 										<a href="/cerca.php" class="quick-nav">
 											<i class="fa fa-search"></i>
 											<span class="hidden-xs">Esegui una nuova ricerca</span>
 										</a>
 									</div>
-					<?php	}elseif($_SESSION['livello'] == 2){ ?>
+					<?php	}
+								if($_SESSION['livello'] <= 1){ ?>
 									<div class="pull-left nav">
 										<a href="/inserisci.php" class="quick-nav">
 											<i class="fa fa-archive"></i>
 											<span class="hidden-xs">Inserisci un nuovo atto</span>
-										</a>
-									</div>
-					<?php	}elseif($_SESSION['livello'] <= 1){ ?>
-									<div class="pull-left nav">
-										<a href="/inserisci.php" class="quick-nav">
-											<i class="fa fa-archive"></i>
-											<span class="hidden-xs">Inserisci un nuovo atto</span>
-										</a>
-									</div>
-									<div class="pull-left nav">
-										<a href="/cerca.php" class="quick-nav">
-											<i class="fa fa-search"></i>
-											<span class="hidden-xs">Esegui una nuova ricerca</span>
 										</a>
 									</div>
 					<?php } ?>
