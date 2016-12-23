@@ -72,50 +72,44 @@
 	//Controlla se l'utente è loggato tramite il livello
   if(isset($_SESSION['livello'])){ 
 		//Codice per homepage se loggato 
-		
-		
-		
-		
-		?>
+?>
+
+
+
 	
 	
 <?php
 	}else{
 		//Codice di login ?>
-		<script type="text/javascript">
-			document.body.style.background = "rgba(0,0,0,0.5)";
-		</script>
+		<section style="height: 256px; background: #2196F3"></section>
 		
-		<section class="full-width">
-			<div class="container">
-				<div class="modal-content center" style="max-width: 640px; margin-top: 10%;">
-					<div class="modal-header" style="background: #2E353C; padding:15px 15px;">
-						<h1 style="color: #f0f0f0;"><center><i class="fa fa-lock" aria-hidden="true"></i> Accedi</center></h1>
-					</div>
-					<div class="modal-body" style="padding:35px 40px;">
-						<form action="" method="post">
-							<div style="text-align: center;">
-<?php						//Controlla se ci sono errori di login
-								if(isset($login_err)){
-									//Stampa eventuali errori
-									echo('<p style="color: red; font-size: 15pt; font-weight: 700;" for="error">'.$login_err.'</p>');
-								} ?>
-							</div>
-							<div class="form-group">
-								<label for="username"><i class="fa fa-user" aria-hidden="true"></i> Nome utente</label>
-								<input class="form-control" id="username" name="username" placeholder="Utente" type="text">
-							</div>
-							<div class="form-group">
-								<label for="password"><i class="fa fa-eye" aria-hidden="true"></i> Chiave di accesso</label>
-								<input class="form-control" id="password" name="password" placeholder="Password" type="password">
-							</div>
-							<button type="submit" name="submit" class="btn btn-success btn-block"><i class="fa fa-power-off" aria-hidden="true"></i> Accedi</button>
-						</form>
-					</div>
-					<div class="modal-footer" style="background: #2E353C;"></div>
-				</div>
+		<section style="height: 64px; background: #64B5F6"></section>
+		
+		<div style="position: absolute; top: 144px; width: 800px; margin-left: auto; margin-right: auto; left: 0; right: 0; background: #FFF;" class="dp2">
+			<div style="background: #1565C0; padding: 17px; color: #FFF;">
+				<h1>&nbsp;</h1>
 			</div>
-		</section>
+			<div class="modal-body" style="padding:35px 40px;">
+				<form action="" method="post">
+					<div style="text-align: center;">
+<?php				//Controlla se ci sono errori di login
+						if(isset($login_err)){
+							//Stampa eventuali errori
+							echo('<p style="color: red; font-size: 15pt; font-weight: 700;" for="error">'.$login_err.'</p>');
+						} ?>
+					</div>
+					<div class="form-group">
+						<label for="username"><i class="fa fa-user" aria-hidden="true"></i> Nome utente</label>
+						<input class="form-control" id="username" name="username" placeholder="Utente" type="text">
+					</div>
+					<div class="form-group">
+						<label for="password"><i class="fa fa-eye" aria-hidden="true"></i> Chiave di accesso</label>
+						<input class="form-control" id="password" name="password" placeholder="Password" type="password">
+					</div>
+					<button type="submit" name="submit" class="btn btn-success btn-block"><i class="fa fa-power-off" aria-hidden="true"></i> Accedi</button>
+				</form>
+			</div>
+		</div>
 	
 <?php 
 	}

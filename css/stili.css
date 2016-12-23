@@ -1,0 +1,203 @@
+/*
+Progetto: Archivio atti edilizi - Comune di Buccinasco
+Autore: Guglielmone Fabio
+Versione: 0.2
+*/
+
+/*========== Indice dei contenuti ==========
+00. Stili Elementi
+01. Material Design
+02. Stili Globali
+*/
+
+/*========== 00. Stili Elementi ==========*/
+* {
+	-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+					box-sizing: border-box;
+}
+*:before,
+*:after {
+	-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+					box-sizing: border-box;
+}
+html {
+	font-family: sans-serif;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	-webkit-text-size-adjust: 100%;
+			-ms-text-size-adjust: 100%;
+}
+body {
+	margin: 0;
+	overflow-x: hidden;
+	font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
+	background-color: #fff;
+}
+
+header,
+section,
+footer {
+	display: block;
+}
+
+a {
+	background-color: transparent;
+}
+a:active,
+a:hover {
+	outline: 0;
+}
+b {
+	font-weight: bold;
+}
+small {
+	font-size: 75%;
+}
+
+/*========== 01. Material Design ==========*/
+
+/*--- Livelli di altezza ---*/
+.dp1 {
+	z-index: 1;
+	box-shadow: rgba(0, 0, 0, 0.109804) 0px 1px 3px, rgba(0, 0, 0, 0.239216) 0px 1px 3px;
+}
+.dp2 {
+	z-index: 2;
+	box-shadow: rgba(0, 0, 0, 0.121569) 0px 2px 4px, rgba(0, 0, 0, 0.239216) 0px 2px 4px;
+}
+.dp3 {
+	z-index: 3;
+	box-shadow: rgba(0, 0, 0, 0.133333) 0px 3px 6px, rgba(0, 0, 0, 0.239216) 0px 2px 6px;
+}
+.dp4 {
+	z-index: 4;
+	box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+}
+.dp6 {
+	z-index: 6;
+	box-shadow: rgba(0, 0, 0, 0.164706) 0px 6px 12px, rgba(0, 0, 0, 0.227451) 0px 4px 12px;
+}
+.dp8 {
+	z-index: 8;
+	box-shadow: rgba(0, 0, 0, 0.188235) 0px 8px 16px, rgba(0, 0, 0, 0.227451) 0px 5px 16px;
+}
+.dp9 {
+	z-index: 9;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 9px 18px, rgba(0, 0, 0, 0.227451) 0px 5px 18px;
+}
+.dp12 {
+	z-index: 12;
+	box-shadow: rgba(0, 0, 0, 0.231373) 0px 12px 24px, rgba(0, 0, 0, 0.227451) 0px 8px 24px;
+}
+.dp16 {
+	z-index: 16;
+	box-shadow: rgba(0, 0, 0, 0.27451) 0px 16px 32px, rgba(0, 0, 0, 0.219608) 0px 12px 32px;
+}
+.dp24 {
+	z-index: 24;
+	box-shadow: rgba(0, 0, 0, 0.364706) 0px 24px 48px, rgba(0, 0, 0, 0.219608) 0px 20px 48px;
+}
+
+/*========== 01. Stili Globali ==========*/
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.hidden {
+	display: none;
+}
+.modal-backdrop {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+	background-color: #000;
+	opacity: 0.33;
+}
+
+/*========== 02. Header ==========*/
+header {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font: inherit;
+	color: #fff;
+	vertical-align: baseline;
+	height: 64px;
+	background-color: #1976D2; 
+	left: 0;
+	right: 0;
+	top: 0;
+	position: fixed;
+}
+header .icona {
+	background: center center no-repeat;
+	background-size: 24px 24px;
+	color: inherit;
+	cursor: pointer;
+	border: 0;
+	display: block;
+	height: 48px;
+	width: 48px;
+	overflow: hidden;
+	z-index: 2;
+	position: relative;
+	top: 8px;
+	transition: all 0.125s ease;
+}
+header .icona.left {
+	left: 12px;
+}
+header .icona.right {
+	right: 12px;
+}
+header .etichetta {
+	display: block;
+	color: #fff;
+	cursor: pointer;
+	font-size: 12px;
+	height: 48px;
+	width: 0;
+	overflow: hidden;
+	padding: 0;
+	position: relative;
+	z-index: 2;
+	margin-top: 8px;
+	transition: .4s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+header .etichetta.enlarged {
+	width: 64px;
+	margin: 8px 16px auto -12px;
+}
+
+
+

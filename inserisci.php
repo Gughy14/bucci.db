@@ -40,25 +40,6 @@
 	include $path.'/part/topbar.php';
 ?>
 
-<div class="full-width" style="margin-top: 34px; background: #11283b; min-height: 125px;"><!-- Cover -->
-	<div class="container" style="text-align: center;">
-	<h2 style="color: #f0f0f0;">Inserisci un nuovo atto</h2>
-	</div>
-</div>
-<div class="full-width" style="background: #38414A;"><!-- Breaking -->
-	&nbsp;
-</div>
-<div class="full-width" style="background: #f0f0f0;"><!-- Fake BG -->
-	&nbsp;
-</div>
-<div class="full-width" style="background: #0971aa;"><!-- Banner -->
-	<div class="container">
-		<div style="text-decoration: none;">
-			<center><h4 style="color: #f0f0f0;">Aggiungi un nuovo atto al database, compilando i campi sottostanti</h4></center>
-		</div>
-	</div>
-</div>
-
 <section style="background: #f0f0f0;" class="full-width form"><!-- Form di inserimento dati -->
 	<form action="inserisci.php?<?php echo($chiave); ?>" method="post" enctype="multipart/form-data" class="container">
 		<div class="panel panel-default"><!-- Pannello Dati -->

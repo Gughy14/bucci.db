@@ -8,18 +8,17 @@
 	<meta name="description" content="Sistema di archivio atti edilizi del Comune di Buccinasco">
 	<meta name="author" content="Guglielmone Fabio">
 	
-	<link rel="icon" href="/imgs/icon.png" sizes="32x32"/>
+	<link rel="icon" href="/imgs/icon.png" sizes="32x32">
 	
 	<!-- Fogli di stile-->
-	<link href="/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/jquery-ui.css" rel="stylesheet">
-	<link href="/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/css/stylesheet.css" rel="stylesheet">
-	
+	<link href="/css/fonts.css" rel="stylesheet">
+	<link href="/css/stili.css" rel="stylesheet">
+		
 	<!-- Script -->
 	<script src="/js/jquery-1.12.4.js"></script>
 	<script src="/js/jquery-ui.js"></script>
-	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/bootstrap-theme.js"></script>
 	
 	<?php
 		//Definizione delle costanti
@@ -42,6 +41,13 @@
 												"relazione_tec" => "Relazione Tecnica" ,
 												"rilascio" => "Documento di Rilascio"
 												);
+		//Nomi delle pagine
+		$pagine = array(
+											"index.php" => "Database Atti Edilizi" ,
+											"cerca.php" => "Ricerca Atti Edilizi" ,
+											"inserisci.php" => "Inserisci Atto Edilizio" ,
+											"atto.php" => "Atto edilizio"
+										);
 		
 		//Messaggi di errore
 		$link_err = "Errore durante la connessione al database: controllare i parametri!";

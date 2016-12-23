@@ -62,28 +62,9 @@
 		include $path.'/part/topbar.php';
 ?>
 
-<div class="full-width" style="margin-top: 34px; background: #11283b; min-height: 125px;"><!-- Cover -->
-	<div class="container" style="text-align: center;">
-	<h2 style="color: #f0f0f0;">Ricerca atti edilizi</h2>
-	</div>
-</div>
-<div class="full-width" style="background: #38414A;"><!-- Breaking Line -->
-	&nbsp;
-</div>
-<div class="full-width" style="background: #f0f0f0;"><!-- Fake BG -->
-	&nbsp;
-</div>
-<div class="full-width" style="background: #0971aa;"><!-- Banner -->
-	<div class="container">
-		<div style="text-decoration: none;">
-			<center><h4 style="color: #f0f0f0;">Consulta il database avviando una ricerca specifica, compilando i parametri desiderati</h4></center>
-		</div>
-	</div>
-</div>
-
-<section style="background: #f0f0f0;" class="full-width form"><!-- Form ricerca dati-->
+<section style="background: #f0f0f0; padding-top: 128px;" class="full-width form"><!-- Form ricerca dati-->
 	<form action="cerca.php?<?php echo($chiave); ?>" method="post" class="container">
-		<div class="panel panel-default"><!-- Pannello Dati -->
+		<div class="panel panel-default" style=""><!-- Pannello Dati -->
 			<div class="panel-heading"><!-- Intestazione Pannello -->
 				<h3 class="panel-title">Dati dell'atto</h3>
 			</div>
@@ -330,7 +311,7 @@
             <tr>
               <td>
 	            <a href='atto.php?id=".$ID."'>
-	              <i class='fa fa-folder-open-o' aria-hidden='true'></i>
+	              <i class='material-icons'>folder_open</i>
 	            </a>
 	          </td>
               <td>".$atto."</td>

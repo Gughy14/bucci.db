@@ -1,4 +1,3 @@
-@charset "utf-8";
 /* Foglio di stile CSS */
 
 
@@ -22,7 +21,7 @@ html {
 }
 
 body {
-	font-family: "MontSerrat", Arial, Helvetica, sans-serif;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	background: #f0f0f0;
 	overflow-x: hidden;
 	cursor:default;

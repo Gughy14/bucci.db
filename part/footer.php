@@ -1,7 +1,7 @@
-	
-	<div class="footer">
-		<div class="container">
-			<div class="row update">
+	<footer style="box-sizing: border-box; margin: 0; padding: 0; border: 0; vertical-align: baseline; display: block; height: 256px; padding: 115px 16px 0; background-color: #37474F; box-shadow: 0 2px 5px rgba(0,0,0,.26); left: 0; right: 0; bottom: -224px; z-index: 8; position: fixed;">
+		<div style="transition: padding-left .2s cubic-bezier(.4,0,.2,1); padding-left: 0; height: 32px; left: 72px; right: 72px; bottom: 0; z-index: 2; position: fixed;" class="header-wrapper">
+			<div style="white-space: nowrap; overflow: hidden; color: #fff; font-size: 14px; line-height: 32px; width: 100%; font-weight: 300;" class="header-title">	
+
 			<?php
 				//Controllo se presente timestamp (è una pratica?)
 				if(isset($insertstamp)){
@@ -15,7 +15,7 @@
 					}
 					
 					//Stampa il valore di footer
-					print('<p>Inserimento pratica: '.$insert_date.'<span style="float:right;">'.$edit_date.'</span></p>');
+					echo('<span style="position: fixed; left: 72px;">Inserimento pratica: '.$insert_date.'</span><span style="position: fixed; right: 72px;">'.$edit_date.'</span>');
 				}else{
 					//Apre e decodifica il file contenente i valori temporali
 					$time_json = file_get_contents('conf/time.json');
@@ -79,13 +79,13 @@
 						$lastcommit = $time_data['last_commit'];
 					}
 					//Stampa in entrambi i casi il footer
-					echo('<p>Ultimo Aggiornamento: '.$lastcommit.'</p>');
+					echo('<span style="position: fixed; left: 72px;">Ultimo aggiornamento: '.$lastcommit.'</span>');
 				}
 			?>
 			
 			</div>
 		</div>
-	</div>
+	</footer>
 </body>
 
 
