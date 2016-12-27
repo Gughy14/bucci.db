@@ -11,7 +11,7 @@
 	if(isset($_POST['submit'])){
 		//Controllo la compilazione dei campi
 		if(empty($_POST['username']) || empty($_POST['password'])){
-			$login_err = "Inserire le credenziali prima di procedere all'accesso";
+			$login_err = "Inserisci le credenziali di accesso!";
 		}else{
 			//Elaborazione variabili
 			$username = $_POST['username'];
@@ -55,12 +55,12 @@
 						header("Refresh:0");
 					}else{
 						//Errore in caso di password errata
-						$login_err = "Password errata";
+						$login_err = "Password errata!";
 					}
 				}
 			}else{
 				//Errore in caso di utente errato
-				$login_err = "Utente non registrato";
+				$login_err = "Utente non registrato in database";
 			}
 			//Chiude la connessione
 			sqlsrv_close($link);
@@ -81,34 +81,41 @@
 <?php
 	}else{
 		//Codice di login ?>
-		<section style="height: 256px; background: #2196F3"></section>
-		
-		<section style="height: 64px; background: #64B5F6"></section>
-		
-		<div style="position: absolute; top: 144px; width: 800px; margin-left: auto; margin-right: auto; left: 0; right: 0; background: #FFF;" class="dp2">
-			<div style="background: #1565C0; padding: 17px; color: #FFF;">
-				<h1>&nbsp;</h1>
-			</div>
-			<div class="modal-body" style="padding:35px 40px;">
-				<form action="" method="post">
-					<div style="text-align: center;">
-<?php				//Controlla se ci sono errori di login
-						if(isset($login_err)){
-							//Stampa eventuali errori
-							echo('<p style="color: red; font-size: 15pt; font-weight: 700;" for="error">'.$login_err.'</p>');
-						} ?>
-					</div>
-					<div class="form-group">
-						<label for="username"><i class="fa fa-user" aria-hidden="true"></i> Nome utente</label>
-						<input class="form-control" id="username" name="username" placeholder="Utente" type="text">
-					</div>
-					<div class="form-group">
-						<label for="password"><i class="fa fa-eye" aria-hidden="true"></i> Chiave di accesso</label>
-						<input class="form-control" id="password" name="password" placeholder="Password" type="password">
-					</div>
-					<button type="submit" name="submit" class="btn btn-success btn-block"><i class="fa fa-power-off" aria-hidden="true"></i> Accedi</button>
-				</form>
-			</div>
+		<section style="height: 256px; background: #2196F3"></section>		
+		<div style="position: absolute; top: 144px; width: 404px; height: 303px; margin-left: auto; margin-right: auto; left: 0; right: 0; background: #FFF; padding: 44px 65px; " class="dp2">
+			<form action="" method="post">
+				<h3 style="color: #222; margin: 0 0 10px; font-size: 18px; font-weight: 700;">
+					Accedi
+				</h3>
+				
+<?php			//Controlla se ci sono errori di login
+					if(isset($login_err)){
+						//Stampa eventuali errori
+						echo('
+									<p style="color: red; margin: 10px 0 30px; font-size: 13px; line-height: 160%;">
+										'.$login_err.'
+									</p>
+								');
+					}else{
+						echo('
+									<p style="color: #666; margin: 10px 0 30px; font-size: 13px; line-height: 160%;">
+										Inserisci le credenziali di accesso
+									</p>
+								');
+					}?>
+				</p>
+				<div id="user" class="input-container">
+          <label style="font-weight: 400; color: #999; display: block; font-size: 13px; margin: 0; padding: 0;">Nome Utente</label>
+          <input style="color: #000; background: #fff; display: inline-block; border: 0; outline: 0; font-size: 13px; padding: 3px 0; margin: 3px 0 0; width: 100%; resize: none;" name="username" id="user" type="text" placeholder="Utente"/>
+        </div>
+				<div class="input-container" id="pwd">
+          <label style="font-weight: 400; color: #999; display: block; font-size: 13px; margin: 0; padding: 0;">Chiave di accesso</label>
+          <input style="color: #000; background: #fff; display: inline-block; border: 0; outline: 0; font-size: 13px; padding: 3px 0; margin: 3px 0 0; width: 100%; resize: none;" name="password" id="pwd" type="password" placeholder="Password"/>
+        </div>
+				<button type="submit" name="submit" style="left: 245px; position: relative; display:block; cursor: pointer; height: 56px; width: 56px; background-color: #FF6D00;border-radius: 50%; border: none; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3);">
+					<i class="material-icons" style="margin:8px; color: #f0f0f0;">lock_open</i>
+				</button>
+			</form>
 		</div>
 	
 <?php 

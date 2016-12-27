@@ -1,4 +1,4 @@
-	<footer style="box-sizing: border-box; margin: 0; padding: 0; border: 0; vertical-align: baseline; display: block; height: 256px; padding: 115px 16px 0; background-color: #37474F; box-shadow: 0 2px 5px rgba(0,0,0,.26); left: 0; right: 0; bottom: -224px; z-index: 8; position: fixed;">
+	<footer style="box-sizing: border-box; margin: 0; padding: 0; border: 0; vertical-align: baseline; display: block; height: 256px; padding: 115px 16px 0; background-color: #1976D2; box-shadow: 0 2px 5px rgba(0,0,0,.26); left: 0; right: 0; bottom: -224px; z-index: 8; position: fixed;">
 		<div style="transition: padding-left .2s cubic-bezier(.4,0,.2,1); padding-left: 0; height: 32px; left: 72px; right: 72px; bottom: 0; z-index: 2; position: fixed;" class="header-wrapper">
 			<div style="white-space: nowrap; overflow: hidden; color: #fff; font-size: 14px; line-height: 32px; width: 100%; font-weight: 300;" class="header-title">	
 
