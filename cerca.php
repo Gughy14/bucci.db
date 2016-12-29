@@ -16,6 +16,7 @@
 		die("ACCESSO NEGATO");
 	}
 ?>
+
 	<script>
 		function sortTable(table, col, reverse) {
 			var tb = table.tBodies[0], // use `<tbody>` to ignore `<thead>` and `<tfoot>` rows
@@ -61,100 +62,101 @@
 		//Include barra di navigazione
 		include $path.'/part/topbar.php';
 ?>
-
-<section style="background: #f0f0f0; padding-top: 128px;" class="full-width form"><!-- Form ricerca dati-->
-	<form action="cerca.php?<?php echo($chiave); ?>" method="post" class="container">
-		<div class="panel panel-default" style=""><!-- Pannello Dati -->
-			<div class="panel-heading"><!-- Intestazione Pannello -->
-				<h3 class="panel-title">Dati dell'atto</h3>
+	
+	<!-- Form ricerca dati-->
+	<section style="height: 192px; background: #2196F3"></section>
+	<section>
+		<form action="cerca.php?<?php echo($chiave); ?>" method="post" class="container" style="margin-top: -96px;">
+			<!-- Pannello Dati -->
+			<div style="margin-top: 40px; background: #FFF;" class="dp2 panel panel-default" style="">
+				<div class="panel-heading"><!-- Intestazione Pannello -->
+					<p class="panel-title">Dati dell'atto</p>
+				</div>
+				<div class="panel-body"><!-- Corpo del Pannello -->
+					<div class="row"><!--Linea #1 | Determinazione specifica/annuale -->
+						<div class="form-group col-sm-6"><!-- Tipo di Atto -->
+							<label for='atto'>Tipo di Atto</label>
+							<select id='atto' name="atto" class="form-control">
+								<option value=""></option>
+								<option value='LE'>Licenza Edilizia</option>
+								<option value='AE'>Autorizzazione Edilizia</option>
+								<option value='NO'>Nulla osta alla costruzione</option>
+								<option value='CE'>Concessione Edilizia</option>
+								<option value='PDC'>Permesso di Costruire (PDC)</option>
+								<option value='DIA.PE'>Denuncia inizio attivit&agrave; (DIA o PE)</option>
+								<option value='SCIA'>Segnalazione Certificata Inizio Attivit&agrave; (SCIA)</option>
+								<option value='L7310'>Comunicazione Inizio Lavori (L7310)</option>
+								<option value='CIL'>Comunicazione Inizio Lavori (CIL)</option>
+								<option value='CILA'>Comunicazione Inizio Lavori Asseverata (CILA)</option>
+							</select>
+						</div>
+						<div class="form-group col-sm-2"><!-- Numero di Atto -->
+							<label for='numero'>Atto n&deg;</label>
+							<input type="text" class="form-control" name="numero" size="8">
+						</div>
+						<div class="form-group col-sm-2"><!-- Anno di Presentazione -->
+							<label for='anno_presentazione'>Anno di pres.</label>
+							<select id="anno_presentazione" name="anno_presentazione" class="form-control">
+								<option value=""></option>
+								<?php
+									foreach(range(date('Y'), $anno0) as $anno){
+										echo('<option value="' . $anno . '">' . $anno . '</option>');
+									}
+								?>
+							</select>
+						</div>
+						<div class="form-group col-sm-2"><!-- Anno di Rilascio -->
+							<label for='anno_rilascio'>Anno di rilascio</label>
+							<select id="anno_rilascio" name="anno_rilascio" class="form-control">
+								<option value=""></option>
+								<?php
+									foreach(range(date('Y'), $anno0) as $anno){
+										echo('<option value="' . $anno . '">' . $anno . '</option>');
+									}
+								?>
+							</select>
+						</div>
+					</div>
+					<div class="row"><!--Linea #2 | Ricerca per indirizzo e Dati catastali -->
+						<div class="form-group col-sm-6"><!-- Indirizzo -->
+							<label for="indirizzo">Via/Piazza/Altro</label>
+							<input type="text" id="indirizzo" name="indirizzo" class="form-control">
+						</div>
+						<div class="form-group col-sm-2">
+							<label for="civico">Civico</label><!-- Civico -->
+							<input type="text" id="civico" name="civico" class="form-control">
+						</div>
+						<div class="form-group col-sm-2"><!-- Foglio -->
+							<label for="foglio">Foglio</label>
+							<input type="text" id="foglio" name="foglio" class="form-control">
+						</div>
+						<div class="form-group col-sm-2"><!-- Mappale -->
+							<label for="mappale">Mappale</label>
+							<input type="text" id="mappale" name="mappale" class="form-control">
+						</div>
+					</div>
+					<div class="row"><!--Linea #4| Ricerca per dati anagrafici -->
+						<div class="form-group col-sm-4"><!-- Nome -->
+							<label for="nome">Nome</label>
+							<input type="text" id="nome" name="nome" class="form-control">
+						</div>
+						<div class="form-group col-sm-4"><!-- Cognome -->
+							<label for="cognome">Cognome</label>
+							<input type="text" id="cognome" name="cognome" class="form-control">
+						</div>
+						<div class="form-group col-sm-4"><!-- societa -->
+							<label for="societa">Societ&agrave;</label>
+							<input type="text" id="societa" name="societa" class="form-control">
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="panel-body"><!-- Corpo del Pannello -->
-				<div class="row"><!--Linea #1 | Determinazione specifica/annuale -->
-					<div class="form-group col-sm-6"><!-- Tipo di Atto -->
-						<label for='atto'>Tipo di Atto</label>
-						<select id='atto' name="atto" class="form-control">
-							<option value=""></option>
-							<option value='LE'>Licenza Edilizia</option>
-							<option value='AE'>Autorizzazione Edilizia</option>
-							<option value='NO'>Nulla osta alla costruzione</option>
-							<option value='CE'>Concessione Edilizia</option>
-							<option value='PDC'>Permesso di Costruire (PDC)</option>
-							<option value='DIA.PE'>Denuncia inizio attivit&agrave; (DIA o PE)</option>
-							<option value='SCIA'>Segnalazione Certificata Inizio Attivit&agrave; (SCIA)</option>
-							<option value='L7310'>Comunicazione Inizio Lavori (L7310)</option>
-							<option value='CIL'>Comunicazione Inizio Lavori (CIL)</option>
-							<option value='CILA'>Comunicazione Inizio Lavori Asseverata (CILA)</option>
-						</select>
-					</div>
-					<div class="form-group col-sm-2"><!-- Numero di Atto -->
-						<label for='numero'>Atto n&deg;</label>
-						<input type="text" class="form-control" name="numero" size="8">
-					</div>
-					<div class="form-group col-sm-2"><!-- Anno di Presentazione -->
-						<label for='anno_presentazione'>Anno di pres.</label>
-						<select id="anno_presentazione" name="anno_presentazione" class="form-control">
-							<option value=""></option>
-							<?php
-								foreach(range(date('Y'), $anno0) as $anno){
-									echo('<option value="' . $anno . '">' . $anno . '</option>');
-								}
-							?>
-						</select>
-					</div>
-					<div class="form-group col-sm-2"><!-- Anno di Rilascio -->
-						<label for='anno_rilascio'>Anno di rilascio</label>
-						<select id="anno_rilascio" name="anno_rilascio" class="form-control">
-							<option value=""></option>
-							<?php
-								foreach(range(date('Y'), $anno0) as $anno){
-									echo('<option value="' . $anno . '">' . $anno . '</option>');
-								}
-							?>
-						</select>
-					</div>
-				</div>
-				<br>
-				<div class="row"><!--Linea #2 | Ricerca per indirizzo e Dati catastali -->
-					<div class="form-group col-sm-6"><!-- Indirizzo -->
-						<label for="indirizzo">Via/Piazza/Altro</label>
-						<input type="text" id="indirizzo" name="indirizzo" class="form-control">
-					</div>
-					<div class="form-group col-sm-2">
-						<label for="civico">Civico</label><!-- Civico -->
-						<input type="text" id="civico" name="civico" class="form-control">
-					</div>
-					<div class="form-group col-sm-2"><!-- Foglio -->
-						<label for="foglio">Foglio</label>
-						<input type="text" id="foglio" name="foglio" class="form-control">
-					</div>
-					<div class="form-group col-sm-2"><!-- Mappale -->
-						<label for="mappale">Mappale</label>
-						<input type="text" id="mappale" name="mappale" class="form-control">
-					</div>
-				</div>
-				<br>
-				<div class="row"><!--Linea #4| Ricerca per dati anagrafici -->
-					<div class="form-group col-sm-4"><!-- Nome -->
-						<label for="nome">Nome</label>
-						<input type="text" id="nome" name="nome" class="form-control">
-					</div>
-					<div class="form-group col-sm-4"><!-- Cognome -->
-						<label for="cognome">Cognome</label>
-						<input type="text" id="cognome" name="cognome" class="form-control">
-					</div>
-					<div class="form-group col-sm-4"><!-- societa -->
-						<label for="societa">Societ&agrave;</label>
-						<input type="text" id="societa" name="societa" class="form-control">
-					</div>
-				</div>
+			<div style="text-align: center;"><!-- Pannello Pulsanti -->
+				<input type="submit" name="submit" value="CERCA" class="material-btn" style="background: #2196F3; color: #FFF">
+				<input type="reset" name="reset" class="material-btn">
 			</div>
-		</div>
-		<div style="text-align: center; margin: 50px auto;"><!-- Pannello Pulsanti -->
-			<input class="btn btn-primary" type="submit" name="submit">
-			<a href="http://129.1.0.92/cerca.php" class="btn btn-default">Reimposta</a>
-		</div>
-	</form>
-</section>
+		</form>
+	</section>
 	
 <?php
 	//Controllo inserimento tramite invio e chiave
@@ -261,13 +263,13 @@
 		
 		//Stampa della sezione risultati
 		echo("
-<section class='full-width' style='background: #f0f0f0; margin-bottom: 42px;' id='results_list'>
+<section style='margin: 42px auto;' id='results_list'>
 	<div class='container'>
-		<div class='panel panel-default'>
+		<div class='panel panel-default' style='border: 1px solid #ddd;'>
 			<div class='panel-heading'>
 				<h3 class='panel-title'>Risultato della ricerca</h3>
 			</div>
-			<div class='panel-body'>
+			<div class='panel-body' style='padding: 16px 32px;'>
 			");
 			
 			//Elaborazione in base al numero di risultati
@@ -311,7 +313,7 @@
             <tr>
               <td>
 	            <a href='atto.php?id=".$ID."'>
-	              <i class='material-icons'>folder_open</i>
+	              <i class='material-icons'>description</i>
 	            </a>
 	          </td>
               <td>".$atto."</td>

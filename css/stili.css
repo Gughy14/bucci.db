@@ -42,7 +42,13 @@ body {
 header,
 section,
 footer {
+	float: left;
+	width: 100%;
 	display: block;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
 }
 
 a {
@@ -58,8 +64,49 @@ b {
 small {
 	font-size: 75%;
 }
-input:focus ~ .input-container{
-	border-bottom: 2px solid #1976D2;
+
+label {
+	color: #777;
+	display: block;
+	font-size: 13px;
+	margin: 0;
+	padding: 0;
+}
+
+input,
+select {
+	font-family: 'Roboto Mono';
+}
+
+select {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+table {
+	width: 100%;
+	display: table;
+	border: none;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+thead {
+	border-bottom: 1px solid #d0d0d0;
+}
+
+th,
+td {
+	padding: 5px;
+	display: table-cell;
+	text-align: left;
+	vertical-align: middle;
+	border-radius: 2px;
+}
+
+tbody > tr:hover{
+	background: #f0f0f0;
 }
 
 /*========== 01. Material Design ==========*/
@@ -106,7 +153,154 @@ input:focus ~ .input-container{
 	box-shadow: rgba(0, 0, 0, 0.364706) 0px 24px 48px, rgba(0, 0, 0, 0.219608) 0px 20px 48px;
 }
 
-/*========== 01. Stili Globali ==========*/
+.material-btn {
+	font-family: Roboto;
+	font-weight: 700;
+    text-decoration: none;
+    color: #333;
+    background-color: #fafafa;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+		outline: 0;
+		border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+		
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+}
+
+
+
+
+/*========== 02. Ex-Bootstrap ==========*/
+.row {
+	margin-right: -15px;
+	margin-left: -15px;
+}
+.row:before,
+.row:after {
+	display: table;
+	content: " ";
+}
+.row:after {
+	clear: both;
+}
+
+
+
+.col-sm-6,
+.col-sm-4,
+.col-sm-3,
+.col-sm-2 {
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-right: 15px;
+	padding-left: 15px;
+}
+
+
+
+.col-sm-6 {
+	width: 50%;
+}
+.col-sm-4 {
+	width: 33.33333333%;
+}
+.col-sm-3 {
+	width: 25%;
+}
+.col-sm-2 {
+	width: 16.66666667%;
+}
+
+
+
+
+
+.panel {
+	margin-bottom: 20px;
+}
+.panel-default {
+    border-color: #ddd;
+}
+.panel-default > .panel-heading {
+	color: #777;
+	border-bottom: 1px solid #ddd;
+}
+.panel-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 16px;
+		font-weight: 500;
+		padding: 16px 32px;
+    color: inherit;
+}
+.panel-body {
+    padding: 32px 64px;
+}
+.form-group {
+	margin-bottom: 15px;
+}
+
+.form-control {
+		resize: none;
+    display: block;
+    width: 100%;
+    height: 34px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+		outline: 0;
+		border: 0;
+		border-bottom: 2px solid #e6e6e6;
+}
+.form-control:focus{
+   border-color: #66afe9;
+}
+.form-control::-moz-placeholder {
+    color: #999;
+    opacity: 1;
+}
+.form-control:-ms-input-placeholder {
+    color: #999;
+}
+.form-control::-webkit-input-placeholder {
+    color: #999;
+}
+.form-control::-ms-expand {
+    background-color: transparent;
+    border: 0;
+}
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    background-color: #eee;
+    opacity: 1;
+}
+.form-control[disabled],
+fieldset[disabled] .form-control {
+    cursor: not-allowed;
+}
+textarea.form-control {
+    height: auto;
+}
+
+
+
+
+
+/*========== 03. Stili Globali ==========*/
 .container {
 	padding-right: 15px;
 	padding-left: 15px;
@@ -115,17 +309,17 @@ input:focus ~ .input-container{
 }
 @media (min-width: 768px) {
 	.container {
-		width: 750px;
+		width: 600px;
 	}
 }
 @media (min-width: 992px) {
 	.container {
-		width: 970px;
+		width: 800px;
 	}
 }
 @media (min-width: 1200px) {
 	.container {
-		width: 1170px;
+		width: 1000px;
 	}
 }
 .left {
@@ -154,19 +348,11 @@ input:focus ~ .input-container{
 	margin: 0 0 22px;
 }
 
-/*========== 02. Header ==========*/
+/*========== 03. Header ==========*/
 header {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font: inherit;
 	color: #fff;
-	vertical-align: baseline;
 	height: 64px;
-	background-color: #1976D2; 
-	left: 0;
-	right: 0;
-	top: 0;
+	background-color: #1976D2;
 	position: fixed;
 }
 header .icona {
@@ -208,7 +394,7 @@ header .etichetta.enlarged {
 	width: 64px;
 	margin: 8px 16px auto -12px;
 }
-/*========== 03. Header ==========*/
+/*========== 04. Header ==========*/
 #usc.focused{
 	border-bottom: 2px solid #1976D2;
 }

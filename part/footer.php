@@ -21,7 +21,7 @@
 					$time_json = file_get_contents('conf/time.json');
 					$time_data = json_decode($time_json, true);
 					
-					//Ottieni timestamp ultima esecuzione
+					//Ottiene timestamp ultima esecuzione
 					$lastexec = $time_data['last_exec'];
 					
 					//Controlla se è passato il tempo richiesto

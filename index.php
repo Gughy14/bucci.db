@@ -75,7 +75,6 @@
 ?>
 
 
-
 	
 	
 <?php
@@ -87,7 +86,6 @@
 				<h3 style="color: #222; margin: 0 0 10px; font-size: 18px; font-weight: 700;">
 					Accedi
 				</h3>
-				
 <?php			//Controlla se ci sono errori di login
 					if(isset($login_err)){
 						//Stampa eventuali errori
@@ -105,11 +103,11 @@
 					}?>
 				</p>
 				<div id="user" class="input-container">
-          <label style="font-weight: 400; color: #999; display: block; font-size: 13px; margin: 0; padding: 0;">Nome Utente</label>
+          <label>Nome Utente</label>
           <input style="color: #000; background: #fff; display: inline-block; border: 0; outline: 0; font-size: 13px; padding: 3px 0; margin: 3px 0 0; width: 100%; resize: none;" name="username" id="user" type="text" placeholder="Utente"/>
         </div>
 				<div class="input-container" id="pwd">
-          <label style="font-weight: 400; color: #999; display: block; font-size: 13px; margin: 0; padding: 0;">Chiave di accesso</label>
+          <label >Chiave di accesso</label>
           <input style="color: #000; background: #fff; display: inline-block; border: 0; outline: 0; font-size: 13px; padding: 3px 0; margin: 3px 0 0; width: 100%; resize: none;" name="password" id="pwd" type="password" placeholder="Password"/>
         </div>
 				<button type="submit" name="submit" style="left: 245px; position: relative; display:block; cursor: pointer; height: 56px; width: 56px; background-color: #FF6D00;border-radius: 50%; border: none; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3);">
