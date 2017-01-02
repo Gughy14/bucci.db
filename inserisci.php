@@ -39,127 +39,150 @@
 	//Include barra di navigazione
 	include $path.'/part/topbar.php';
 ?>
-
-<section style="background: #f0f0f0;" class="full-width form"><!-- Form di inserimento dati -->
-	<form action="inserisci.php?<?php echo($chiave); ?>" method="post" enctype="multipart/form-data" class="container">
-		<div class="panel panel-default"><!-- Pannello Dati -->
-			<div class="panel-heading"><!-- Intestazione Pannello -->
-				<h3 class="panel-title">Dati della pratica</h3>
-			</div>
-		<div class="panel-body"><!-- Corpo del Pannello -->
-				<div class="row"><!--Linea #1 | Determinazione specifica/annuale -->
-					<div class="form-group col-sm-6"><!-- Tipo di Atto -->
-						<label for='atto'>Tipo di Atto</label>
-						<select name="atto" id="atto" class="form-control">
-							<option value='LE'>Licenza Edilizia</option>
-							<option value='AE'>Autorizzazione Edilizia</option>
-							<option value='NO'>Nulla osta alla costruzione</option>
-							<option value='CE'>Concessione Edilizia</option>
-							<option value='PDC'>Permesso di Costruire (PDC)</option>
-							<option value='DIA.PE'>Denuncia inizio attivit&agrave; (DIA o PE)</option>
-							<option value='SCIA'>Segnalazione Certificata Inizio Attivit&agrave; (SCIA)</option>
-							<option value='L7310'>Comunicazione Inizio Lavori (L7310)</option>
-							<option value='CIL'>Comunicazione Inizio Lavori (CIL)</option>
-							<option value='CILA'>Comunicazione Inizio Lavori Asseverata (CILA)</option>
-            </select>
-					</div>
-					<div class="form-group col-sm-2"><!-- Numero di Atto -->
-						<label for='numero'>Atto n&deg;</label>
-						<input type="text" class="form-control" name="numero" id="numero" size="8">
-					</div>
-					<div class="form-group col-sm-2"><!-- Data di Presentazione -->
-						<label for='data_presentazione'>Data di pres.</label>
-						<input type="date" name="data_presentazione" id="data_presentazione" class="form-control">
-					</div>
-					<div class="form-group col-sm-2"><!-- Data di Rilacio -->
-						<label for='data_rilascio'>Data di rilascio</label>
-						<input type="date" name="data_rilascio" id="data_rilascio" class="form-control">
-					</div>
-				</div>
-				<br>
-				<div class="row"><!--Linea #2 | Inserimento indirizzo -->
-					<div class="form-group col-sm-6"><!-- Indirizzo -->
-						<label for="indirizzo">Via/Piazza/Altro</label>
-						<input type="text" name="indirizzo" class="form-control">
-					</div>
-					<div class="form-group col-sm-2"><!-- Civico -->
-						<label for="civico">Civico</label>
-						<input type="text" name="civico" class="form-control">
-					</div>
-				</div>
-				<br>
-				<div class="row"><!--Linea #3 | Inerimento dati catastali -->
-					<div class="form-group col-sm-2"><!-- Foglio -->
-						<label for="foglio">Foglio</label>
-						<input type="text" name="foglio" class="form-control">
-					</div>
-					<div class="form-group col-sm-2"><!-- Mappale -->
-						<label for="mappale">Mappale</label>
-						<input type="text" name="mappale" class="form-control">
-					</div>
-					<div class="form-group col-sm-2"><!-- Subalterno -->
-						<label for="subalterno">Subalterno</label>
-						<input type="text" name="subalterno" class="form-control">
+	
+		<!-- Modal -->
+    <div class="modal fade" id="modalSuccess" role="dialog">
+      <div class="modal-dialog" style="margin-top: 20%;">
+        <div class="modal-content">
+          <div class="modal-header" style="background: #2E353C; padding:15px 15px;">
+            <button type="button" class="close" style="color: #f0f0f0" data-dismiss="modal">&times;</button>
+            <h3 style="color: #f0f0f0;"><center><span class="fa fa-check"></span> Pratica inserita con successo</center></h3>
+            <a href="atto.php?id='.$ID.'">Visualizza</a></li>";
           </div>
+        </div>
+      </div>
+    </div>
+	
+	
+	<section style="height: 192px; background: #2196F3"></section>
+	<section><!-- Form di inserimento dati -->
+		<form action="inserisci.php?<?php echo($chiave); ?>" method="post" enctype="multipart/form-data" class="container" style="margin-top: -96px;">
+			<div style="margin-top: 40px; background: #FFF;" class="dp2 panel panel-default">
+				<div class="panel-heading"><!-- Intestazione Pannello -->
+					<h3 class="panel-title">Dati della pratica</h3>
 				</div>
-				<br>
-				<div class="row"><!--Linea #4| Inerimento dati anagrafici -->
-					<div class="form-group col-sm-4"><!-- Nome -->
-						<label for="nome">Nome</label>
-						<input type="text" name="nome" class="form-control">
+				<div class="panel-body"><!-- Corpo del Pannello -->
+					<div class="row"><!--Linea #1 | Determinazione specifica/annuale -->
+						<div class="form-group col-sm-6"><!-- Tipo di Atto -->
+							<label for='atto'>Tipo di Atto</label>
+							<select name="atto" id="atto" class="form-control"><span class="caret">?</span>
+								<option value='LE'>Licenza Edilizia</option>
+								<option value='AE'>Autorizzazione Edilizia</option>
+								<option value='NO'>Nulla osta alla costruzione</option>
+								<option value='CE'>Concessione Edilizia</option>
+								<option value='PDC'>Permesso di Costruire (PDC)</option>
+								<option value='DIA.PE'>Denuncia inizio attivit&agrave; (DIA o PE)</option>
+								<option value='SCIA'>Segnalazione Certificata Inizio Attivit&agrave; (SCIA)</option>
+								<option value='L7310'>Comunicazione Inizio Lavori (L7310)</option>
+								<option value='CIL'>Comunicazione Inizio Lavori (CIL)</option>
+								<option value='CILA'>Comunicazione Inizio Lavori Asseverata (CILA)</option>
+							</select>
+						</div>
+						<div class="form-group col-sm-2"><!-- Numero di Atto -->
+							<label for='numero'>Atto n&deg;</label>
+							<input type="text" class="form-control" name="numero" id="numero" size="8">
+						</div>
+						<div class="form-group col-sm-2"><!-- Data di Presentazione -->
+							<label for='data_presentazione'>Data di pres.</label>
+							<input type="date" name="data_presentazione" id="data_presentazione" class="form-control">
+						</div>
+						<div class="form-group col-sm-2"><!-- Data di Rilacio -->
+							<label for='data_rilascio'>Data di rilascio</label>
+							<input type="date" name="data_rilascio" id="data_rilascio" class="form-control">
+						</div>
 					</div>
-					<div class="form-group col-sm-4"><!-- Cognome -->
-						<label for="cognome">Cognome</label>
-						<input type="text" name="cognome" class="form-control">
+					<div class="row"><!--Linea #2 | Inserimento indirizzo -->
+						<div class="form-group col-sm-6"><!-- Indirizzo -->
+							<label for="indirizzo">Via/Piazza/Altro</label>
+							<input type="text" name="indirizzo" class="form-control">
+						</div>
+						<div class="form-group col-sm-2"><!-- Civico -->
+							<label for="civico">Civico</label>
+							<input type="text" name="civico" class="form-control">
+						</div>
 					</div>
-					<div class="form-group col-sm-4"><!-- Società -->
-						<label for="societa">Societ&agrave;</label>
-						<input type="text" name="societa" class="form-control">
+					<div class="row"><!--Linea #3 | Inerimento dati catastali -->
+						<div class="form-group col-sm-2"><!-- Foglio -->
+							<label for="foglio">Foglio</label>
+							<input type="text" name="foglio" class="form-control">
+						</div>
+						<div class="form-group col-sm-2"><!-- Mappale -->
+							<label for="mappale">Mappale</label>
+							<input type="text" name="mappale" class="form-control">
+						</div>
+						<div class="form-group col-sm-2"><!-- Subalterno -->
+							<label for="subalterno">Subalterno</label>
+							<input type="text" name="subalterno" class="form-control">
+						</div>
 					</div>
-				</div>
-				<br>
-				<div class="form-group"><!-- Oggetto -->
-					<label for="oggetto">Oggetto</label>
-					<textarea name="oggetto" rows="4" cols="75" class="form-control"></textarea>
+					<div class="row"><!--Linea #4| Inerimento dati anagrafici -->
+						<div class="form-group col-sm-4"><!-- Nome -->
+							<label for="nome">Nome</label>
+							<input type="text" name="nome" class="form-control">
+						</div>
+						<div class="form-group col-sm-4"><!-- Cognome -->
+							<label for="cognome">Cognome</label>
+							<input type="text" name="cognome" class="form-control">
+						</div>
+						<div class="form-group col-sm-4"><!-- Società -->
+							<label for="societa">Societ&agrave;</label>
+							<input type="text" name="societa" class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-12"><!-- Oggetto -->
+							<label for="oggetto">Oggetto</label>
+							<textarea name="oggetto" rows="1" cols="3" id="oggetto" class="form-control" style="padding: 6px 0px;"></textarea>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="panel panel-default"><!-- Pannello Allegati -->
-			<div class="panel-heading"><!-- Intestazione Pannello -->
-				<h3 class="panel-title">Allegati</h3>
-			</div>
-			<div class="panel-body"><!-- Corpo del Pannello -->
-			<?php
-				//Controlla lista allegati in config
-				foreach($allegabili as $allegato => $desc){
-					//Imposta il valore NULL come default 
-					$$allegato = NULL;
-					//Stampa la sezione di caricamento
-					echo('
-								<div class="col-lg-6 col-sm-5 col-10">
-									<span class="help-block">'.$desc.'
-										<span style="float:right;" id="'.$allegato.'" onclick="rimuovifile(this.id)">Rimuovi &times;</span>
-									</span>
-									<div class="input-group">
-										<label class="input-group-btn">
-											<span class="btn btn-primary">
-												Carica&hellip; <input type="file" name="'.$allegato.'_up" id="'.$allegato.'_up" style="display: none;">
-											</span>
-										</label>
-										<input type="text" id="'.$allegato.'_label" class="form-control" readonly>
+			<div style="margin-top: 40px; background: #FFF;" class="dp2 panel panel-default">
+				<div class="panel-heading"><!-- Intestazione Pannello -->
+					<h3 class="panel-title">Allegati</h3>
+				</div>
+				<div class="panel-body"><!-- Corpo del Pannello -->
+					<div class="row">
+				<?php
+					//Controlla lista allegati in config
+					foreach($allegabili as $allegato => $desc){
+						//Imposta il valore NULL come default 
+						$$allegato = NULL;
+						//Stampa la sezione di caricamento
+						echo('
+								<div class="col-sm-6">
+									<span class="help-block">'.$desc.'</span>
+									<div class="row input-group">
+										<div class="col-sm-2" style="height:34px;">
+											<label class="no-btn btn-primary">
+													<i class="material-icons" style="margin: 5px 10px;">file_upload</i>
+													<input type="file" name="'.$allegato.'_up" id="'.$allegato.'_up" style="display: none;">
+											</label>
+										</div>
+										<div class="col-sm-8" style="padding: 0;">
+											<input type="text" id="'.$allegato.'_label" class="form-control" disabled>
+										</div>
+										<div class="col-sm-2" style="height:34px;">
+											<label id="'.$allegato.'" class="no-btn btn-danger" onclick="rimuovifile(this.id)">
+												<i class="material-icons" style="margin: 5px 10px;">delete_forever</i>
+											</label>
+										</div>
 									</div>
 								</div>
-								');
-				}
-			?>
+									');
+					}
+				?></div>
+				</div>
 			</div>
-		</div>
-		<div style="text-align: center; margin: 50px auto;"><!-- Pannello Pulsanti -->
-			<input class="btn btn-primary" type="submit" name="submit">
-			<input class="btn btn-default" type="reset" name="reset">
-		</div>
-	</form>
-</section>
+			<div style="text-align: center; margin: 32px auto 96px auto;"><!-- Pannello Pulsanti -->
+				<input class="btn btn-primary" type="submit" name="submit">
+				<input class="btn btn-default" type="reset" name="reset">
+			</div>
+		</form>
+	</section>
+	<script>
+		autosize(document.querySelectorAll('#oggetto'));
+	</script>
 
 <?php /* ELABORAZIONE INSERIMENTO */
 	//Controllo inserimento tramite invio e chiave
@@ -276,7 +299,7 @@
 					//Sposta il file in archivio
 					move_uploaded_file($file['tmp_name'], $filename);
 					//Rinomina il file in base alla categoria
-					rename($filename, $percorso.$att_trunc.".".$infofile['extension']);
+					rename($filename, $percorso_file.$att_trunc.".".$infofile['extension']);
 					$$att_trunc = $infofile['extension'];
 				}
 			}

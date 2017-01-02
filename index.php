@@ -1,5 +1,8 @@
 <?php
 	//Definisce la directory base del sito
+	
+	
+	
 	$path = $_SERVER['DOCUMENT_ROOT'];
 	
 	//Include Intestazione

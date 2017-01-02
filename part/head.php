@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-	<title>DB v0.3.1</title>
+	<title>DB v0.3.3</title>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="keywords" content="Atti Edilizi, Pratiche, Archivio, DB, Database">
@@ -16,9 +16,10 @@
 	<link href="/css/stili.css" rel="stylesheet">
 		
 	<!-- Script -->
-	<script src="/js/jquery-1.12.4.js"></script>
-	<script src="/js/jquery-ui.js"></script>
-	<script src="/js/bootstrap-theme.js"></script>
+	<script src="/js/jquery-1.12.4.js" type="text/javascript"></script>
+	<script src="/js/jquery-ui.js" type="text/javascript"></script>
+	<script src="/js/bootstrap.js" type="text/javascript"></script>
+	<script src="/js/autosize.js" type="text/javascript"></script>
 	
 	<?php
 		//Definizione delle costanti

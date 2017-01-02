@@ -68,7 +68,7 @@
 	<section>
 		<form action="cerca.php?<?php echo($chiave); ?>" method="post" class="container" style="margin-top: -96px;">
 			<!-- Pannello Dati -->
-			<div style="margin-top: 40px; background: #FFF;" class="dp2 panel panel-default" style="">
+			<div style="margin-top: 40px; background: #FFF;" class="dp2 panel panel-default">
 				<div class="panel-heading"><!-- Intestazione Pannello -->
 					<p class="panel-title">Dati dell'atto</p>
 				</div>
@@ -152,8 +152,8 @@
 				</div>
 			</div>
 			<div style="text-align: center;"><!-- Pannello Pulsanti -->
-				<input type="submit" name="submit" value="CERCA" class="material-btn" style="background: #2196F3; color: #FFF">
-				<input type="reset" name="reset" class="material-btn">
+				<input type="submit" name="submit" value="CERCA" class="btn btn-primary">
+				<input type="reset" name="reset" class="btn" onclick="window.location.href='/cerca.php'">
 			</div>
 		</form>
 	</section>
