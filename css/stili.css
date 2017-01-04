@@ -340,7 +340,9 @@ tbody > tr:hover{
     border-top: 1px solid #e5e5e5;
 }
 
-
+.flip {
+	transform: scale(1, -1);
+}
 .close {
     float: right;
     font-size: 21px;
@@ -369,7 +371,12 @@ button.close {
 
 
 
-
+.input-container {
+	height: 50px;
+	border-bottom: 2px solid #e6e6e6;
+	padding: 0;
+	margin: 0 0 22px;
+}
 
 
 

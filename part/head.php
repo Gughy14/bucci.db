@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-	<title>DB v0.3.3</title>
+	<title>DB v1.0.0</title>
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="keywords" content="Atti Edilizi, Pratiche, Archivio, DB, Database">
@@ -47,7 +47,7 @@
 											"index.php" => "Database Atti Edilizi" ,
 											"cerca.php" => "Ricerca Atti Edilizi" ,
 											"inserisci.php" => "Inserisci Atto Edilizio" ,
-											"atto.php" => "Atto edilizio"
+											"atto.php" => "Visualizzazione Atto edilizio "
 										);
 		
 		//Messaggi di errore
@@ -61,6 +61,7 @@
 		$size_err = "Impossibile caricare il file poiché di dimensioni superiori a ".str_replace('*','',$max_att_size)." bytes: ";
 		$index_err = "Si è verificato un errore durante la creazione della copertina della pratica";
 		$search_err = "Errore durante la ricerca dei dati.";
+		$unique_err = "Il numero di atto specificato è già registrato nel database";
 		
 		//Inizia la sessione
 		session_start();

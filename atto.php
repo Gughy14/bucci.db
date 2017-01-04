@@ -53,39 +53,41 @@
 		
 	//Determina il formato da utilizzare per proprietà
 	if($cognome === 'X' AND $nome === 'X' AND $societa === 'X'){
-		$proprieta = "<span style='float: left'>Nessun riferimento di propriet&agrave; presente in database";
+		$proprieta = "<div class='col-sm-12'>Nessun riferimento di propriet&agrave; presente in database</div>";
 	}elseif($cognome !== 'X' AND $nome !== 'X' AND $societa === 'X'){
-		$proprieta = "<span style='float: left'>Propriet&agrave;: </span><span style='float: right'><i class='fa fa-user' aria-hidden='true'></i> ".$cognome." ".$nome."</span>";
+		$proprieta = "<div class='col-sm-6'>Propriet&agrave;</div><div class='col-sm-3'>".$cognome."</div><div class='col-sm-3'>".$nome."</div>";
 	}elseif($cognome !== 'X' AND $nome === 'X' AND $societa !== 'X'){
-		$proprieta = "<span style='float: left'>Propriet&agrave;: </span><span style='float: right'><i class='fa fa-user' aria-hidden='true'></i> ".$cognome." &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class='fa fa-users' aria-hidden='true'></i> ".$societa."</span>";
+		$proprieta = "<div class='col-sm-6'>Propriet&agrave;</div><div class='col-sm-3'>".$cognome."</div><div class='col-sm-3'>".$societa."</div>";
 	}elseif($cognome !== 'X' AND $nome === 'X' AND $societa === 'X'){
-		$proprieta = "<span style='float: left'>Propriet&agrave;: </span><span style='float: right'><i class='fa fa-user' aria-hidden='true'></i> ".$cognome."</span>";
+		$proprieta = "<div class='col-sm-6'>Propriet&agrave;</div><div class='col-sm-6'>".$cognome."</div>";
 	}elseif($cognome === 'X' AND $nome === 'X' AND $societa !== 'X'){
-		$proprieta = "<span style='float: left'>Propriet&agrave;: </span><span style='float: right'><i class='fa fa-users' aria-hidden='true'></i> ".$societa."</span>";
+		$proprieta = "<div class='col-sm-6'>Propriet&agrave;</div><div class='col-sm-6'>".$societa."</div>";
 	}else{
-		$proprieta = "<span style='float: left'>Propriet&agrave;: </span><span style='float: right'><i class='fa fa-user' aria-hidden='true'></i> ".$cognome." ".$nome." &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i class='fa fa-users' aria-hidden='true'></i> ".$societa."</span>";
+		$proprieta = "<div class='col-sm-6'>Propriet&agrave;</div><div class='col-sm-2'>".$cognome."</div><div class='col-sm-2'>".$nome."</div><div class='col-sm-2'>".$societa."</div>";
 	}
 
 	//Determina il formato da utilizzare per indirizzo
 	if($indirizzo === 'X' AND $civico === 'X'){
-		$stradali = "<span style='float: left'>Nessun indirizzo presente in database";
+		$stradali = "<div class='col-sm-12'>Nessun indirizzo presente in database</div>";
 	}elseif($indirizzo !== 'X' AND $civico === 'X'){
-		$stradali = '<span style="float: left">Indirizzo: </span><span style="float: right">'.$indirizzo.'</span>';
+		$stradali = "<div class='col-sm-6'>Indirizzo</div><div class='col-sm-6'>".$indirizzo."</div>";
 	}else{
-		$stradali = '<span style="float: left">Indirizzo: </span><span style="float: right">'.$indirizzo.', '.$civico.'</span>';
+		$stradali = "<div class='col-sm-6'>Indirizzo</div><div class='col-sm-4'>".$indirizzo."</div><div class='col-sm-2'>Civico ".$civico."</div>";
 	}
 		
 	//Determina il formato da utilizzare per dati catastali
 	if($foglio !== 0 AND $mappale !== 0 AND $subalterno !== 0){
-		$catastali = "<span style='float: left'>Dati Catastali: </span><span style='float: right'>Foglio ".$foglio." Mappale ".$mappale." Subalterno ".$subalterno."</span>";
+		$catastali = "<div class='col-sm-6'>Dati Catastali</div><div class='col-sm-2'>Foglio ".$foglio."</div><div class='col-sm-2'>Mappale ".$mappale."</div><div class='col-sm-2'>Subalterno ".$subalterno."</div>";
 	}elseif($foglio !== 0 AND $mappale !== 0 AND $subalterno == 0){
-		$catastali = "<span style='float: left'>Dati Catastali: </span><span style='float: right'>Foglio ".$foglio." Mappale ".$mappale."</span>";
+		$catastali = "<div class='col-sm-6'>Dati Catastali</div><div class='col-sm-3'>Foglio ".$foglio."</div><div class='col-sm-3'>Mappale ".$mappale."</div>";
 	}elseif($foglio !== 0 AND $mappale == 0 AND $subalterno == 0){
-		$catastali = "<span style='float: left'>Dati Catastali: </span><span style='float: right'>Foglio ".$foglio."</span>";
-	}elseif($foglio == 0 AND $mappale == 0 AND $subalterno == 0){
-		$catastali = "<span style='float: left'>Nessun riferimento catastale presente in database";
+		$catastali = "<div class='col-sm-6'>Dati Catastali</div><div class='col-sm-6'>Foglio ".$foglio."</div>";
+	}elseif($foglio == 0 AND $mappale !== 0 AND $subalterno !== 0){
+		$catastali = "<div class='col-sm-6'>Riferimento di Foglio Mancante</div><div class='col-sm-3'>Mappale ".$mappale."</div><div class='col-sm-3'>Subalterno ".$subalterno."</div>";
+	}elseif($foglio == 0 AND $mappale !== 0 AND $subalterno == 0){
+		$catastali = "<div class='col-sm-6'>Riferimento di Foglio Mancante</div><div class='col-sm-6'>Mappale ".$mappale."</div>";
 	}else{
-		$catastali = "<span style='float: left'>Riferimento di Foglio Mancante: </span><span style='float: right'>Mappale ".$mappale." Subalterno ".$subalterno."</span>";
+		$catastali = "<div class='col-sm-12'>Nessun riferimento catastale presente in database</div>";
 	}
 		
 	//Query di restituzione estensioni allegati
@@ -128,6 +130,40 @@
 	//Associa il valore da stampare alla presenza dell'allegato
 	$allegati = array_combine($files, $presente);
 	
+	//================================//
+	//===     ELIMINA PRATICA      ===//
+	//================================//
+	
+	if(isset($_GET['mod']) && ($_GET['mod'] == "del") && ($_SESSION['livello'] == 1)){
+	
+		//Cancella i record dei dati
+		$deldat_query = "DELETE FROM pratica.dat
+										 WHERE ID=$ID";
+		$deldat_stmt = sqlsrv_query($link, $deldat_query);
+		if($deldat_stmt === false){
+			die(print_r( sqlsrv_errors(), true));
+		}		
+		//Cancella i record degli allegati
+		$delatt_query = "DELETE FROM pratica.att 
+										 WHERE IDatt=$attID";
+		$delatt_stmt = sqlsrv_query($link, $delatt_query);
+		if($delatt_stmt === false){
+			die(print_r( sqlsrv_errors(), true));
+		}				 
+		
+		//Rimuove i files
+		$files = glob(str_replace('..','D:',$percorso."*.*"));
+		//Per ogni estensione che esiste
+		foreach ($files as $file){
+			//Elimina il file
+			unlink($file);
+		}
+		//Rimuove la cartella
+		rmdir(str_replace('..','D:',$percorso));
+		
+		//Reindirizza alla pagina di ricerca
+		header("location: /cerca.php");
+	}
 	
 	//================================//
 	//===     MODIFICA TITOLO      ===//
@@ -339,168 +375,214 @@
 	
 	//Stampa l'intestazione della pratica
 	echo("
-	<div class='full-width' style='margin-top: 34px; background: #11283b; min-height: 190px;'>
-		<div class='container' style='text-align: center;'>
+	<section style='height: 192px; background: #2196F3'></section>
+	<section>
+		<div class='container' style='margin-top: -96px;'>
+			<div style='margin-top: 40px; background: #FFF;' class='dp2 panel panel-default'>
+				<div class='panel-heading'>
+					<h3 class='panel-title' style='text-align: center;'>
+						
 			");
-	
-	//Se l'utente ha i privilegi di modifica
-	if(isset($_SESSION['livello']) && ($_SESSION['livello'] == 1)){
+				
+	//Se è in corso la modifica del titolo
+	if(isset($_GET['mod']) && ($_GET['mod'] == "tit") && ($_SESSION['livello'] == 1)){
+		//Stampa il pulsante di uscita
+		echo("	
+						".$atto."&nbsp;".$numero."
+						<a style='float: right;' href='?id=$ID'>
+							<i class='material-icons' style=' vertical-align: middle;'>clear</i>
+						</a>
+				");
+	//Se invece non è in corso ma ci sono i permessi per farlo
+	}elseif(isset($_SESSION['livello']) && ($_SESSION['livello'] == 1)){
 		//Stampa il pulsante di modifica dati
 		echo("
-			<a href='?id=$ID&mod=tit'>
-				<i class='fa fa-pencil-square-o' style='float:right; color: #f0f0f0; margin:10px 17px 0px 0px;' title='Modifica' aria-hidden='true'></i>
-			</a>
-			<h1 style='font-size: 60px; color: #f0f0f0;'>".$atto." &nbsp; ".$numero."</h1>
+						<a style='float: left;' href='?id=$ID&mod=del' onclick='return confirm(\"Vuoi eliminare definitivamente tutti i dati e gli allegati di questa pratica?\");'>
+							<i class='material-icons' vertical-align: middle;'>delete_forever</i>
+						</a>
+						".$atto."&nbsp;".$numero."
+						<a style='float: right;' href='?id=$ID&mod=tit'>
+							<i class='material-icons' vertical-align: middle;'>mode_edit</i>
+						</a>
 				");
+	//Se invece non si hanno permessi
+	}else{
+		//Stampa solo il titolo
+		echo($atto."&nbsp;".$numero);
 	}
+	
+	//Stampa la chiusura del titolo in intestazione e l'apertura dell'oggetto
+	echo("
+					</h3>
+				</div>
+				<div class='panel-body'>
+			");
 	//Se è attivata la modifica del titolo
 	if(isset($_GET['mod']) && ($_GET['mod'] == "tit") && ($_SESSION['livello'] == 1)){
 		echo("
-			<form action='?id=$ID' method='post' enctype='multipart/form-data'>
-				<div class='form-group'><!-- Oggetto -->
-					<textarea name='oggetto' rows='4' cols='3' class='form-control' style='background: #11283b ;color: #f0f0f0;'>".$oggetto."</textarea>
-						<div style='text-align: center; margin: 10px auto;'><!-- Pannello Pulsanti -->
+					<form action='?id=$ID' method='post' enctype='multipart/form-data'>
+						<div class='form-group col-sm-12' style='padding: 0px;'>
+							<textarea name='oggetto' id='oggetto' class='form-control' style='padding: 6px 0px; overflow: hidden; overflow-wrap: break-word; height: 34px;'>".$oggetto."</textarea>
+						</div>
+						<div style='text-align: center; margin: 10px auto;'>
 							<input class='btn btn-primary' type='submit' name='tit-submit' value='Modifica'>
 							<input class='btn btn-default' type='reset' name='reset'>
 						</div>
-				</div>
-			</form>
+					</form>
+					<script>
+						autosize(document.querySelectorAll('#oggetto'));
+					</script>
 				");
 	//In caso contrario...
 	}else{
 		//Stampa il titolo
 		echo("
-			
-			<h4 style='color: #f0f0f0;'>".$oggetto."</h4>
+					<span>".$oggetto."</span>
 				");
 	}
 	//Stampa la chiusura del titolo
 	echo("
-		</div>
-	</div>
-	<div class='full-width' style='background: #38414A;'>&nbsp;</div>
-	");
-		
-	//Stampa il pannello dati
-	echo("
-	<div class='full-width' style='background: #f0f0f0;'>
-		<div class='container'>
-			<div class='panel panel-default cover'>
-				<div class='panel-heading'>
-					<h3 class='panel-title'>Dati dell'atto");
+				</div>
+			</div>
+	");			
 	
-	//Se l'utente ha i privilegi di modifica
-	if(isset($_SESSION['livello']) && ($_SESSION['livello'] == 1)){
+	
+	
+	//Stampa l'apertura del pannello dati
+	echo("
+			<div style='margin-top: 20px; background: #FFF;' class='dp2 panel panel-default'>
+				<div class='panel-heading'>
+					<h3 class='panel-title'>Dati dell'Atto
+			");
+
+	//Se è in corso la modifica dei dati
+	if(isset($_GET['mod']) && ($_GET['mod'] == "dat") && ($_SESSION['livello'] == 1)){
+		//Stampa il pulsante di uscita
+		echo("
+						<a style='float: right;' href='?id=$ID'>
+							<i class='material-icons' style=' vertical-align: middle;'>clear</i>
+						</a>
+				");
+
+	//Se invece non è in corso ma ci sono i permessi per farlo
+	}elseif(isset($_SESSION['livello']) && ($_SESSION['livello'] == 1)){
 		//Stampa il pulsante di modifica dati
 		echo("
-						<span style='float: right;'>
-							<a href='?id=$ID&mod=dat'>
-								<i class='fa fa-pencil-square-o' title='Modifica' aria-hidden='true'></i>
-							</a>
-						</span>
+						<a style='float: right;' href='?id=$ID&mod=dat'>
+							<i class='material-icons' style=' vertical-align: middle;'>mode_edit</i>
+						</a>
 				");
+
 	}
-	//Stampa la chiusra dell'intestazione e l'apertura del contenuto
+			
+	//Stampa la chiusura del titolo in intestazione e l'apertura dell'oggetto
 	echo("
 					</h3>
 				</div>
-				<div class='panel-body cover'>
+				<div class='panel-body'>
 			");
 	
 	//Se è attivata la modifica dei dati
 	if(isset($_GET['mod']) && ($_GET['mod'] == "dat") && ($_SESSION['livello'] == 1)){
 		//Stampa l'area di modifica dati
 		echo("
-						<form action='?id=$ID' method='post' enctype='multipart/form-data'>
-							<div class='row'><!--Linea #4| Inerimento dati anagrafici -->
-								<div class='form-group col-sm-4'><!-- Nome -->
-									<label for='nome'>Nome</label>
-									<input type='text' name='nome' class='form-control' value='$nome'>
-								</div>
-								<div class='form-group col-sm-4'><!-- Cognome -->
-									<label for='cognome'>Cognome</label>
-									<input type='text' name='cognome' class='form-control' value='$cognome'>
-								</div>
-								<div class='form-group col-sm-4'><!-- Società -->
-									<label for='societa'>Societ&agrave;</label>
-									<input type='text' name='societa' class='form-control' value='$societa'>
-								</div>
+					<form action='?id=$ID' method='post' enctype='multipart/form-data'>
+						<div class='row'><!--Linea #4| Inerimento dati anagrafici -->
+							<div class='form-group col-sm-4'><!-- Nome -->
+								<label for='nome'>Nome</label>
+								<input type='text' name='nome' class='form-control' value='$nome'>
 							</div>
-							<div class='row'><!--Linea #2 | Inserimento indirizzo -->
-								<div class='form-group col-sm-6'><!-- Indirizzo -->
-									<label for='indirizzo'>Via/Piazza/Altro</label>
-									<input type='text' name='indirizzo' class='form-control' value='$indirizzo'>
-								</div>
-								<div class='form-group col-sm-2'><!-- Civico -->
-									<label for='civico'>Civico</label>
-									<input type='text' name='civico' class='form-control' value='$civico'>
-								</div>
+							<div class='form-group col-sm-4'><!-- Cognome -->
+								<label for='cognome'>Cognome</label>
+								<input type='text' name='cognome' class='form-control' value='$cognome'>
 							</div>
-							<div class='row'><!--Linea #3 | Inerimento dati catastali -->
-								<div class='form-group col-sm-2'><!-- Foglio -->
-									<label for='foglio'>Foglio</label>
-									<input type='text' name='foglio' class='form-control' value='$foglio'>
-								</div>
-								<div class='form-group col-sm-2'><!-- Mappale -->
-									<label for='mappale'>Mappale</label>
-									<input type='text' name='mappale' class='form-control' value='$mappale'>
-								</div>
-								<div class='form-group col-sm-2'><!-- Subalterno -->
-									<label for='subalterno'>Subalterno</label>
-									<input type='text' name='subalterno' class='form-control' value='$subalterno'>
-								</div>
+							<div class='form-group col-sm-4'><!-- Società -->
+								<label for='societa'>Societ&agrave;</label>
+								<input type='text' name='societa' class='form-control' value='$societa'>
 							</div>
-							<div style='text-align: center; margin: 10px auto;'><!-- Pannello Pulsanti -->
-								<input class='btn btn-primary' type='submit' name='dat-submit' value='Modifica'>
-								<input class='btn btn-default' type='reset' name='reset'>
+						</div>
+						<div class='row'><!--Linea #2 | Inserimento indirizzo -->
+							<div class='form-group col-sm-6'><!-- Indirizzo -->
+								<label for='indirizzo'>Via/Piazza/Altro</label>
+								<input type='text' name='indirizzo' class='form-control' value='$indirizzo'>
 							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
+							<div class='form-group col-sm-2'><!-- Civico -->
+								<label for='civico'>Civico</label>
+								<input type='text' name='civico' class='form-control' value='$civico'>
+							</div>
+						</div>
+						<div class='row'><!--Linea #3 | Inerimento dati catastali -->
+							<div class='form-group col-sm-2'><!-- Foglio -->
+								<label for='foglio'>Foglio</label>
+								<input type='text' name='foglio' class='form-control' value='$foglio'>
+							</div>
+							<div class='form-group col-sm-2'><!-- Mappale -->
+								<label for='mappale'>Mappale</label>
+								<input type='text' name='mappale' class='form-control' value='$mappale'>
+							</div>
+							<div class='form-group col-sm-2'><!-- Subalterno -->
+								<label for='subalterno'>Subalterno</label>
+								<input type='text' name='subalterno' class='form-control' value='$subalterno'>
+							</div>
+						</div>
+						<div style='text-align: center; margin: 10px auto;'><!-- Pannello Pulsanti -->
+							<input class='btn btn-primary' type='submit' name='dat-submit' value='Modifica'>
+							<input class='btn btn-default' type='reset' name='reset'>
+						</div>
+					</form>
 		");
 	
 	//In caso contrario..
 	}else{
 		//Stampa l'area di visualizzazione dati
 		echo("
-						<h4>".$proprieta."</h4>
-						<br>
-						<h4>".$stradali."</h4>
-						<br>
-						<h4>".$catastali."</h4>
-					</div>
-				</div>
-			</div>
-		</div>
+					<div class='row'>".$proprieta."</div>
+					<br>
+					<div class='row'>".$stradali."</div>
+					<br>
+					<div class='row'>".$catastali."</div>
 		");
 	}
-
-	//Stampa il pannello dati
+	//Stampa la chiusura dei dati
 	echo("
-	<div class='full-width' style='background: #f0f0f0;'>
-		<div class='container'>
-			<div class='panel panel-default cover'>
-				<div class='panel-heading'>
-					<h3 class='panel-title'>Allegati");
+				</div>
+			</div>
+	");			
+	
 
-	//Se l'utente ha i privilegi di modifica
-	if(isset($_SESSION['livello']) && ($_SESSION['livello'] == 1)){
+
+	//Stampa l'apertura del pannello dati
+	echo("
+			<div style='margin-top: 20px; background: #FFF;' class='dp2 panel panel-default'>
+				<div class='panel-heading'>
+					<h3 class='panel-title'>Allegati
+			");
+
+	//Se è in corso la modifica degli allegati
+	if(isset($_GET['mod']) && ($_GET['mod'] == "att") && ($_SESSION['livello'] == 1)){
+		//Stampa il pulsante di uscita
+		echo("
+						<a style='float: right;' href='?id=$ID'>
+							<i class='material-icons' style=' vertical-align: middle;'>clear</i>
+						</a>
+				");
+	//Se invece non è in corso ma ci sono i permessi per farlo
+	}elseif(isset($_SESSION['livello']) && ($_SESSION['livello'] == 1)){
 		//Stampa il pulsante di modifica dati
 		echo("
-						<span style='float: right;'>
-							<a href='?id=$ID&mod=att'>
-								<i class='fa fa-pencil-square-o' title='Modifica' aria-hidden='true'></i>
-							</a>
-						</span>");
+						<a style='float: right;' href='?id=$ID&mod=att'>
+							<i class='material-icons' style=' vertical-align: middle;'>attach_file</i>
+						</a>
+				");
+
 	}
-	//Stampa la chiusra dell'intestazione e l'apertura del contenuto
+			
+	//Stampa la chiusura del titolo in intestazione e l'apertura dell'oggetto
 	echo("
 					</h3>
 				</div>
-			<div class='panel-body cover'>
-			");
+				<div class='panel-body'>
+			");				
 	
 	//Se è attivata la modifica degli allegati
 	if(isset($_GET['mod']) && ($_GET['mod'] == "att") && ($_SESSION['livello'] == 1)){
@@ -525,17 +607,23 @@
 		foreach($allegabili as $allegato => $desc){
 			//Stampa la sezione di caricamento
 			echo('
-							<div class="form-group col-lg-6 col-sm-5 col-10">
-								<span class="help-block">'.$desc.'
-									<span style="float:right;" id="'.$allegato.'" onclick="rimuovifile(this.id);cestina(this.id)">Rimuovi &times;</span>
-								</span>
-								<div class="input-group">
-									<label class="input-group-btn">
-										<span class="btn btn-primary">
-											Carica&hellip; <input type="file" name="'.$allegato.'_up" id="'.$allegato.'_up" style="display: none;">
-										</span>
-									</label>
-									<input type="text" id="'.$allegato.'_label" class="form-control" value="'.$$allegato.'" readonly>
+							<div class="col-sm-6">
+								<span class="help-block">'.$desc.'</span>
+								<div class="row input-group">
+									<div class="col-sm-2" style="height:34px;">
+										<label class="no-btn btn-primary">
+												<i class="material-icons" style="margin: 5px 10px;">file_upload</i>
+												<input type="file" name="'.$allegato.'_up" id="'.$allegato.'_up" style="display: none;">
+										</label>
+									</div>
+									<div class="col-sm-8" style="padding: 0;">
+										<input type="text" id="'.$allegato.'_label" value="'.$$allegato.'" class="form-control" disabled>
+									</div>
+									<div class="col-sm-2" style="height:34px;">
+										<label id="'.$allegato.'" class="no-btn btn-danger" onclick="rimuovifile(this.id);cestina(this.id)">
+											<i class="material-icons" style="margin: 5px 10px;">delete_forever</i>
+										</label>
+									</div>
 								</div>
 							</div>
 						');
@@ -572,9 +660,15 @@
 	echo("
 				</div>
 			</div>
-		</div>
-	</div>
 	");
+	
+		//Stampa la chiusura della sezione
+	echo("
+		</div>
+	</section>
+			");
+	//-------------------------------------------
+	
 	
 	//Include pié di pagina
 	include $path.'/part/footer.php';	

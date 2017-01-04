@@ -74,13 +74,16 @@
 <?php
 	//Controlla se l'utente è loggato tramite il livello
   if(isset($_SESSION['livello'])){ 
-		//Codice per homepage se loggato 
-?>
-
-
-	
-	
-<?php
+		//Controlla se è un logout
+		if(isset($_GET['logout'])){
+			//Distrugge la sessione
+			session_destroy();
+			//Ricarica la pagina
+			header("location: /");
+		}else{
+			//Reindirizza alla funzione di ricerca
+			header("location: /cerca.php");
+		}
 	}else{
 		//Codice di login ?>
 		<section style="height: 256px; background: #2196F3"></section>		
@@ -105,15 +108,15 @@
 								');
 					}?>
 				</p>
-				<div id="user" class="input-container">
+				<div class="form-group">
           <label>Nome Utente</label>
-          <input style="color: #000; background: #fff; display: inline-block; border: 0; outline: 0; font-size: 13px; padding: 3px 0; margin: 3px 0 0; width: 100%; resize: none;" name="username" id="user" type="text" placeholder="Utente"/>
+          <input class="form-control" name="username" type="text" placeholder="Utente"/>
         </div>
-				<div class="input-container" id="pwd">
+				<div class="form-group">
           <label >Chiave di accesso</label>
-          <input style="color: #000; background: #fff; display: inline-block; border: 0; outline: 0; font-size: 13px; padding: 3px 0; margin: 3px 0 0; width: 100%; resize: none;" name="password" id="pwd" type="password" placeholder="Password"/>
+          <input class="form-control" name="password" id="pwd" type="password" placeholder="Password"/>
         </div>
-				<button type="submit" name="submit" style="left: 245px; position: relative; display:block; cursor: pointer; height: 56px; width: 56px; background-color: #FF6D00;border-radius: 50%; border: none; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3);">
+				<button type="submit" name="submit" style="top: 8px; left: 245px; position: relative; display:block; cursor: pointer; height: 56px; width: 56px; background-color: #FF6D00;border-radius: 50%; border: none; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3);">
 					<i class="material-icons" style="margin:8px; color: #f0f0f0;">lock_open</i>
 				</button>
 			</form>

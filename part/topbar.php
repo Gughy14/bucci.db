@@ -29,7 +29,7 @@
 		<div onclick="window.location.href='/part/esci.php'" class="etichetta right">
 			<div style="margin-top: 16px;">ESCI</div>
 		</div>
-		<button onclick="window.location.href='/part/esci.php'" class="icona right">
+		<button onclick="window.location.href='/index.php?logout'" class="icona right">
 			<i style="width: 24px; vertical-align: middle;" class="material-icons" title="Esci dall'applicazione">exit_to_app</i>
 		</button>
 
@@ -56,10 +56,11 @@
 					
 <?php 	}
 			} ?>
+		<!-- Pulsante per un'homepage che ora come ora non esiste
 		<div onclick="window.location.href='/'" class="etichetta right">
 			<div style="margin-top: 16px;">HOMEPAGE</div>
 		</div>
 		<button onclick="window.location.href='/'" class="icona right">
 			<i style="width: 24px; vertical-align: middle;" class="material-icons" title="Mostra il menu">home</i>
-		</button>
+		</button>-->
 	</header>

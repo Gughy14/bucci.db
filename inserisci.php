@@ -40,20 +40,6 @@
 	include $path.'/part/topbar.php';
 ?>
 	
-		<!-- Modal -->
-    <div class="modal fade" id="modalSuccess" role="dialog">
-      <div class="modal-dialog" style="margin-top: 20%;">
-        <div class="modal-content">
-          <div class="modal-header" style="background: #2E353C; padding:15px 15px;">
-            <button type="button" class="close" style="color: #f0f0f0" data-dismiss="modal">&times;</button>
-            <h3 style="color: #f0f0f0;"><center><span class="fa fa-check"></span> Pratica inserita con successo</center></h3>
-            <a href="atto.php?id='.$ID.'">Visualizza</a></li>";
-          </div>
-        </div>
-      </div>
-    </div>
-	
-	
 	<section style="height: 192px; background: #2196F3"></section>
 	<section><!-- Form di inserimento dati -->
 		<form action="inserisci.php?<?php echo($chiave); ?>" method="post" enctype="multipart/form-data" class="container" style="margin-top: -96px;">
@@ -66,16 +52,16 @@
 						<div class="form-group col-sm-6"><!-- Tipo di Atto -->
 							<label for='atto'>Tipo di Atto</label>
 							<select name="atto" id="atto" class="form-control"><span class="caret">?</span>
-								<option value='LE'>Licenza Edilizia</option>
-								<option value='AE'>Autorizzazione Edilizia</option>
-								<option value='NO'>Nulla osta alla costruzione</option>
-								<option value='CE'>Concessione Edilizia</option>
-								<option value='PDC'>Permesso di Costruire (PDC)</option>
-								<option value='DIA.PE'>Denuncia inizio attivit&agrave; (DIA o PE)</option>
-								<option value='SCIA'>Segnalazione Certificata Inizio Attivit&agrave; (SCIA)</option>
-								<option value='L7310'>Comunicazione Inizio Lavori (L7310)</option>
-								<option value='CIL'>Comunicazione Inizio Lavori (CIL)</option>
-								<option value='CILA'>Comunicazione Inizio Lavori Asseverata (CILA)</option>
+								<option value='LE'>LE. &nbsp;&nbsp;&nbsp;&nbsp;Licenza Edilizia</option>
+								<option value='AE'>AE. &nbsp;&nbsp;&nbsp;&nbsp;Autorizzazione Edilizia</option>
+								<option value='NO'>NO. &nbsp;&nbsp;&nbsp;&nbsp;Nulla osta alla costruzione</option>
+								<option value='CE'>CE. &nbsp;&nbsp;&nbsp;&nbsp;Concessione Edilizia</option>
+								<option value='PDC'>PDC. &nbsp;&nbsp;&nbsp;Permesso di Costruire (PDC)</option>
+								<option value='DIA.PE'>DIA. &nbsp;&nbsp;&nbsp;Denuncia inizio attivit&agrave; (o PE)</option>
+								<option value='SCIA'>SCIA. &nbsp;&nbsp;Segnalazione Certificata Inizio Attivit&agrave;</option>
+								<option value='L7310'>L7310. &nbsp;Comunicazione Inizio Lavori</option>
+								<option value='CIL'>CIL. &nbsp;&nbsp;&nbsp;Comunicazione Inizio Lavori</option>
+								<option value='CILA'>CILA. &nbsp;&nbsp;Comunicazione Inizio Lavori Asseverata</option>
 							</select>
 						</div>
 						<div class="form-group col-sm-2"><!-- Numero di Atto -->
@@ -317,6 +303,27 @@
 		}
 		//------------------------------
 		
+		$unique_query = "SELECT ID
+										FROM pratica.dat
+										WHERE numero = ?
+										";
+		//Parametri di ricerca
+		$unique_params = array(
+														$numero,
+													);
+		//Esecuzione inserimento loc
+		$unique_stmt = sqlsrv_query($link, $unique_query, $unique_params);
+		if($unique_stmt === false){
+			die('<script>alert("'.$search_err.'")</script>');
+		}else{
+			if(sqlsrv_has_rows($unique_stmt) === true){
+				die('<script>alert("'.$unique_err.'")</script>');
+			}
+		}
+		
+		
+		
+		
 		//INSERIMENTO ALLEGATI
 		//Query di inserimento allegati
     $att_query = "INSERT INTO pratica.att (presentazione,
@@ -437,7 +444,7 @@
 			sqlsrv_fetch($dat_stmt); 
 			$ID = sqlsrv_get_field($dat_stmt, 0);
 			echo '
-	<!-- Modal -->
+		<!-- Modal -->
     <div class="modal fade" id="modalSuccess" role="dialog">
       <div class="modal-dialog" style="margin-top: 20%;">
         <div class="modal-content">

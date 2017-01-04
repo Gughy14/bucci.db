@@ -51,10 +51,17 @@
 		window.onload = function () {makeAllSortable();};
 
 		function sort_ogg(){
-			if(document.getElementById("ogg").className.match(/(?:^|\s)fa-sort-alpha-desc(?!\S)/)){
-				document.getElementById("ogg").className = "fa fa-sort-alpha-asc";	
+			if(document.getElementById("ogg").className.match(/(?:^|\s)material-icons NULL(?!\S)/)){
+				document.getElementById("ogg").className = "material-icons flip";	
 			}else{
-				document.getElementById("ogg").className = "fa fa-sort-alpha-desc";	
+				document.getElementById("ogg").className = "material-icons NULL";	
+			}
+		}
+		function sort_num(){
+			if(document.getElementById("num").className.match(/(?:^|\s)material-icons NULL(?!\S)/)){
+				document.getElementById("num").className = "material-icons flip";	
+			}else{
+				document.getElementById("num").className = "material-icons NULL";	
 			}
 		}
 	</script>
@@ -278,14 +285,17 @@
 			}else{
 				//Stampa della tabella di contenimento
 				echo("
-				<table class='table table-responsive table-hover table-striped'>
+				<table class='table table-responsive table-hover table-striped' style='cursor: default;'>
 					<thead>
 						<tr>
-							<th>File</th>
-							<th>Atto</th>
-							<th>Numero</th>
+							<th style='width: 32px;'>File</th>
+							<th style='width: 32px;'>Atto</th>
+							<th style='width: 80px;' onclick='sort_num()'>
+								<i id='num' class='material-icons NULL' style='font-size: 16px; float: left;'>arrow_upward</i>
+								<span style='float: left;'>&nbsp; Num.</span>
+							</th>		
 							<th onclick='sort_ogg()'>
-								<i id='ogg' class='fa fa-sort-alpha-desc' aria-hidden='true'></i>
+								<i id='ogg' class='material-icons NULL' style='font-size: 16px;'>arrow_upward</i>
 								&nbsp; Oggetto
 							</th>				
 						</tr>
@@ -311,13 +321,13 @@
 					//Stampa delle variabili in tabella
 					echo("
             <tr>
-              <td>
-	            <a href='atto.php?id=".$ID."'>
-	              <i class='material-icons'>description</i>
-	            </a>
-	          </td>
-              <td>".$atto."</td>
-              <td>".$numero."</td>
+              <td style='text-align: center;'>
+								<a href='atto.php?id=".$ID."'>
+									<i class='material-icons'>description</i>
+								</a>
+							</td>
+              <td style='text-align: center;'>".$atto."</td>
+              <td style='text-align: center;'>".$numero."</td>
               <td>".$oggetto."</td>
             </tr>
 					");
