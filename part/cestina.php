@@ -20,7 +20,7 @@
 		$estensione = NULL;
 		
 		$file_path = $percorso.$allegato.'*';
-		
+				
 		//Legge il file con ogni estensione
 		$files = glob(str_replace('..','D:',$file_path));
 	
@@ -36,11 +36,9 @@
 									WHERE IDatt=$attID";
 
 		//Parametri di inserimento allegati
-		$att_params = array(
-												$estensione
-												);
+		$att_params = 
 		//Statement di inserimento allegati
-		$att_stmt = sqlsrv_query($link, $att_query, $att_params);
+		$att_stmt = sqlsrv_query($link, $att_query, array($estensione));
 		//Esecuzione inserimento allegati
 		if($att_stmt === false){
 			die("Errore aggiornamento");

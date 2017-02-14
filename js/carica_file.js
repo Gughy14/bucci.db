@@ -18,9 +18,15 @@
 			});
 		});
 	});
-	
-	function rimuovifile(clicked_id){
-		var id = (clicked_id);
-		$("#"+id+"_up").replaceWith($("#"+id+"_up").val('').clone(true));
-		document.getElementById(id+"_label").value = "";
+
+	function rimuoviFile(id){
+		
+		if(id.indexOf('del') >= 0) {
+			var filename = id.replace('_del', '');
+		}else if (id.indexOf('up') >= 0){
+			var filename = id.replace('_up', '');
+		}
+		
+		$("#" + filename + "_up").replaceWith($("#" + filename + "_up").val('').clone(true));
+		document.getElementById(filename + "_label").value = "";
 	}
