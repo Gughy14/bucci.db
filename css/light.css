@@ -1,0 +1,165 @@
+/* Foglio di stile tema LIGHT */
+
+/*
+Progetto: Archivio atti edilizi - Comune di Buccinasco
+Autore: Guglielmone Fabio
+Versione: 0.1
+*/
+
+html,
+body {
+	background-color: #fafafa;
+	color: #333;
+}
+
+label {
+	color: #777;
+}
+
+.no-btn,
+.btn {
+	background-color: #fafafa;
+	color: #333;
+}
+.no-btn:hover,
+.btn:hover {
+	background-color: #fff;
+}
+
+.btn-primary {
+	background: #2196F3;
+	color: #FFF;
+}
+.btn-primary:hover{
+	background: #42A5F5;
+}
+.btn-danger {
+	background: #C00;
+	color: #FFF;
+}
+.btn-danger:hover{
+	background: #d9534f;
+}
+
+.panel-default > .panel-heading {
+	color: #777;
+}
+
+input,
+select,
+textarea {
+	color: #555;
+	background-color: #fff;
+	border: 0;
+	border-bottom: 2px solid #e6e6e6;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+   border-color: #8f8fef;
+}
+
+input::-moz-placeholder,
+input::-ms-input-placeholder,
+input::-webkit-input-placeholder,
+select::-moz-placeholder,
+select::-ms-input-placeholder,
+select::-webkit-input-placeholder,
+textarea::-moz-placeholder,
+textarea::-ms-input-placeholder,
+textarea::-webkit-input-placeholder {
+	color: #999;
+}
+
+input[disabled],
+input[readonly],
+select[disabled],
+select[readonly],
+textarea[disabled],
+textarea[readonly] {
+	background-color: #fff;
+	opacity: 1;
+}
+
+.help-block {
+	color: #8c8c8c;
+}
+
+header {
+	background-color: #1976D2;
+	color: #fff;
+}
+
+header .etichetta {
+	color: #fff;
+}
+
+.ui-datepicker-month,
+.ui-datepicker-year {
+	color: #555;
+	background-color: #fff;
+}
+
+/*HEADER*/
+
+#menu-icon i{
+	color: #fff;
+}
+
+.section.material{
+	background: #2196F3;
+}
+
+/*LOGIN*/
+#login-popup {
+	background: #FFF;
+}
+
+#login-popup h3{
+	color: #222;
+}
+
+#login-popup p {
+	color: red;
+}
+
+#login-popup button#login {
+	background-color: #FF6D00;
+}
+
+#login-popup button#login i{
+	color: #f0f0f0;
+}
+
+/* FOOTER */
+footer {
+	background-color: #1976D2;
+}
+
+footer .wrapper {
+	color: #fff;
+}
+
+/*CERCA */
+
+.panel {
+	background: #FFF;
+}
+.panel-default > .panel-heading {
+	border-bottom: 1px solid #ddd;
+}
+
+tbody > tr:hover{
+	background: #f0f0f0;
+}
+
+tbody > tr > td > a > i,
+h3 > a > i,
+.panel-body a {
+	color: #104d89;
+}
+
+a.paginate_button.current {
+		background-color: #0D47A1;
+}

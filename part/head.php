@@ -59,13 +59,15 @@
 		<meta name="description" content="Sistema di archivio atti edilizi del Comune di Buccinasco">
 		
 		<!-- Stili Globali -->
+		<link href="NULL" rel="stylesheet" id="theme">
 		<link href="/css/jquery-ui.css" rel="stylesheet">
 		<link href="/css/stili.css" rel="stylesheet">
 		
 		<!-- Fonts Globali -->
 		<link href="/css/fonts.css" rel="stylesheet">
-			
+		
 		<!-- Script Globali -->
 		<script src="/js/jquery-1.12.4.js" type="application/javascript"></script>
 		<script src="/js/bootstrap.js" type="application/javascript"></script>
+		<script src="/js/tema.js" type="application/javascript"></script>
 		

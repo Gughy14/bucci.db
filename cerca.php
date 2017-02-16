@@ -7,7 +7,7 @@
 ?>
 		
 		<link rel="stylesheet" type="text/css" href="/css/dataTables.css">
-		<script type="text/javascript" charset="utf8" src="/js/jquery.dataTables.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/js/jquery.dataTables.min.js"></script>
 		
 		<script>
 		
@@ -69,12 +69,12 @@
 	}else{ ?>
 		
 		<!-- Intestazione Colore -->
-		<div class="section" style="height: 192px; background: #2196F3"></div>
+		<div class="section material"></div>
 		
 		<!-- Sezione dati di ricerca -->
 		<div class="section">
-			<form action="<?php echo htmlentities($_SERVER['PHP_SELF']."?".$chiave); ?>" method="post" class="container" style="margin-top: -96px;">
-				<div style="margin-top: 40px; background: #FFF;" class="dp2 panel panel-default">
+			<form action="<?php echo htmlentities($_SERVER['PHP_SELF']."?".$chiave); ?>" method="post" class="container">
+				<div class="dp2 panel panel-default first-panel">
 					<!-- Intestazione Pannello -->
 					<div class="panel-heading">
 						<p class="panel-title">Dati dell'atto</p>
@@ -104,7 +104,7 @@
 							<!-- Numero di Atto -->
 							<div class="form-group col-sm-2">
 								<label for='numero'>Atto n&deg;</label>
-								<input type="text" class="form-control" id="numero" name="numero" size="8" <?php echo(!isset($_POST['numero']) ? : 'value="'.$_POST['numero'].'"'); ?>>
+								<input type="text" class="form-control" id="numero" name="numero" size="8" <?php echo(!isset($_POST['numero']) ? NULL : 'value="'.$_POST['numero'].'"'); ?>>
 							</div>
 							<!-- Anno di Presentazione -->
 							<div class="form-group col-sm-2">
@@ -132,22 +132,22 @@
 							<!-- Indirizzo -->
 							<div class="form-group col-sm-6">
 								<label for="indirizzo">Via/Piazza/Altro</label>
-								<input type="text" id="indirizzo" name="indirizzo" class="form-control" <?php echo(!isset($_POST['indirizzo']) ? : 'value="'.$_POST['indirizzo'].'"'); ?>>
+								<input type="text" id="indirizzo" name="indirizzo" class="form-control" <?php echo(!isset($_POST['indirizzo']) ? NULL : 'value="'.$_POST['indirizzo'].'"'); ?>>
 							</div>
 							<!-- Civico -->
 							<div class="form-group col-sm-2">
 								<label for="civico">Civico</label>
-								<input type="text" id="civico" name="civico" class="form-control" <?php echo(!isset($_POST['civico']) ? : 'value="'.$_POST['civico'].'"'); ?>>
+								<input type="text" id="civico" name="civico" class="form-control" <?php echo(!isset($_POST['civico']) ? NULL : 'value="'.$_POST['civico'].'"'); ?>>
 							</div>
 							<!-- Foglio -->
 							<div class="form-group col-sm-2">
 								<label for="foglio">Foglio</label>
-								<input type="text" id="foglio" name="foglio" class="form-control" <?php echo(!isset($_POST['foglio']) ? : 'value="'.$_POST['foglio'].'"'); ?>>
+								<input type="text" id="foglio" name="foglio" class="form-control" <?php echo(!isset($_POST['foglio']) ? NULL : 'value="'.$_POST['foglio'].'"'); ?>>
 							</div>
 							<!-- Mappale -->
 							<div class="form-group col-sm-2">
 								<label for="mappale">Mappale</label>
-								<input type="text" id="mappale" name="mappale" class="form-control" <?php echo(!isset($_POST['mappale']) ? : 'value="'.$_POST['mappale'].'"'); ?>>
+								<input type="text" id="mappale" name="mappale" class="form-control" <?php echo(!isset($_POST['mappale']) ? NULL : 'value="'.$_POST['mappale'].'"'); ?>>
 							</div>
 						</div>
 						<!--Linea #4| Ricerca per dati anagrafici -->
@@ -155,25 +155,25 @@
 							<!-- Nome -->
 							<div class="form-group col-sm-4">
 								<label for="nome">Nome</label>
-								<input type="text" id="nome" name="nome" class="form-control" <?php echo(!isset($_POST['nome']) ? : 'value="'.$_POST['nome'].'"'); ?>>
+								<input type="text" id="nome" name="nome" class="form-control" <?php echo(!isset($_POST['nome']) ? NULL : 'value="'.$_POST['nome'].'"'); ?>>
 							</div>
 							<!-- Cognome -->
 							<div class="form-group col-sm-4">
 								<label for="cognome">Cognome</label>
-								<input type="text" id="cognome" name="cognome" class="form-control" <?php echo(!isset($_POST['cognome']) ? : 'value="'.$_POST['cognome'].'"'); ?>>
+								<input type="text" id="cognome" name="cognome" class="form-control" <?php echo(!isset($_POST['cognome']) ? NULL : 'value="'.$_POST['cognome'].'"'); ?>>
 							</div>
 							<!-- Società -->
 							<div class="form-group col-sm-4">
 								<label for="societa">Societ&agrave;</label>
-								<input type="text" id="societa" name="societa" class="form-control" <?php echo(!isset($_POST['societa']) ? : 'value="'.$_POST['societa'].'"'); ?>>
+								<input type="text" id="societa" name="societa" class="form-control" <?php echo(!isset($_POST['societa']) ? NULL : 'value="'.$_POST['societa'].'"'); ?>>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- Pannello Pulsanti -->
 				<div style="text-align: center;">
-					<input type="submit" name="submit" value="CERCA" class="btn btn-primary">
-					<input type="reset" name="reset" class="btn" onclick="window.location.href='<?php echo htmlentities($_SERVER['PHP_SELF']); ?>'">
+					<button type="submit" name="submit" class="btn btn-primary">CERCA</button>
+					<button type="reset" name="reset" class="btn" onclick="window.location.href='<?php echo htmlentities($_SERVER['PHP_SELF']); ?>'">REIMPOSTA</button>
 				</div>
 			</form>
 		</div>
@@ -241,15 +241,15 @@
 					//Stampa della sezione risultati
 					echo("
 		<!-- Sezione risultati della ricerca -->
-		<div class='section' style='margin: 42px auto;' id='results_list'>
+		<div class='section' id='results_list'>
 			<div class='container'>
-				<div style='margin-top: 40px; background: #FFF;' class='dp2 panel panel-default'>
+				<div class='dp2 panel panel-default'>
 					<!-- Intestazione Pannello -->
 					<div class='panel-heading'>
 						<h3 class='panel-title'>Risultato della ricerca</h3>
 					</div>
 					<!-- Corpo Pannello -->
-					<div class='panel-body' style='padding: 16px 32px;'>");
+					<div class='panel-body'>");
 						
 						//Elaborazione in base al numero di risultati
 						if(sqlsrv_has_rows($search_stmt) === false){
@@ -257,7 +257,7 @@
 						}else{
 							//Stampa della tabella di contenimento
 							echo("
-						<table id='risultati-tab' class='table table-striped table-hover' cellspacing='0' width='100%'>
+						<table id='risultati-tab' class='table table-striped table-hover'>
 							<!-- Intestazione Tabella --><thead>
 								<tr>
 									<th style='width: 32px;'>File</th>
@@ -285,7 +285,7 @@
 								
 								//Stampa delle variabili in tabella
 								echo("
-								<tr praticaID='".$ID."'>
+								<!-- Pratica ID $ID--><tr>
 									<td style='text-align: center;'>
 										<a href='/atto.php?id=".$ID."'>
 											<i class='material-icons'>attachment</i>

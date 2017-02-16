@@ -303,13 +303,13 @@
 		</div>
 		
 		<!-- Intestazione Colore -->
-		<div class="section" style="height: 192px; background: #2196F3"></div>
+		<div class="section material"></div>
 		
 		<!-- Sezione dati della pratica -->
 		<div class="section">
-			<form action="<?php echo htmlentities($_SERVER['PHP_SELF']."?".$chiave); ?>" method="post" enctype="multipart/form-data" class="container" style="margin-top: -96px;">
+			<form action="<?php echo htmlentities($_SERVER['PHP_SELF']."?".$chiave); ?>" method="post" enctype="multipart/form-data" class="container">
 				<!-- Pannello DATI -->
-				<div style="margin-top: 40px; background: #FFF;" class="dp2 panel panel-default">
+				<div class="dp2 panel panel-default">
 					<!-- Intestazione Pannello -->
 					<div class="panel-heading">
 						<h3 class="panel-title">Dati della pratica</h3>
@@ -410,7 +410,7 @@
 					</div>
 				</div>
 				<!-- Pannello ALLEGATI -->
-				<div style="margin-top: 40px; background: #FFF;" class="dp2 panel panel-default">
+				<div class="dp2 panel panel-default">
 					<!-- Intestazione Pannello -->
 					<div class="panel-heading">
 						<h3 class="panel-title">Allegati</h3>
@@ -450,8 +450,8 @@
 				</div>
 				<!-- Pannello Pulsanti -->
 				<div style="text-align: center; margin: 32px auto 96px auto;">
-					<input class="btn btn-primary" type="submit" name="submit">
-					<input class="btn btn-default" type="reset" name="reset">
+					<button class="btn btn-primary" type="submit" name="submit">INSERISCI</button>
+					<button class="btn btn-default" type="reset" name="reset">REIMPOSTA</button>
 				</div>
 			</form>
 			<!-- Calendario e selezione data --><script>

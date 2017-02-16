@@ -87,28 +87,23 @@
 		} ?>
 		
 		<!-- Intestazione Colore -->
-		<div class="section" style="height: 256px; background: #2196F3"></div>
+		<div class="section material" style="height: 256px;"></div>
 		
 		<!-- Riquadro di autenticazione -->
-		<div style="position: absolute; top: 144px; width: 404px; height: 303px; margin-left: auto; margin-right: auto; left: 0; right: 0; background: #FFF; padding: 44px 65px; " class="dp2">
+		<div id="login-popup" class="dp2">
 			<form action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post">
-				<h3 style="color: #222; margin: 0 0 10px; font-size: 18px; font-weight: 700;">
-					Accedi
-				</h3>
-				<p style="color: red; margin: 10px 0 30px; font-size: 13px; line-height: 160%;">
-					<?php echo (isset($login_err) ? $login_err : 'Inserisci le credenziali di accesso');?>
-
-				</p>
+				<h3>Accedi</h3>
+				<p><?php echo (isset($login_err) ? $login_err : '&nbsp;');?></p>
 				<div class="form-group">
 					<label>Nome Utente</label>
 					<input class="form-control" name="username" type="text" placeholder="Test"/>
 				</div>
 				<div class="form-group">
-					<label >Chiave di accesso</label>
+					<label>Chiave di accesso</label>
 					<input class="form-control" name="password" id="pwd" type="password" placeholder="123"/>
 				</div>
-				<button type="submit" name="submit" style="top: 8px; left: 245px; position: relative; display:block; cursor: pointer; height: 56px; width: 56px; background-color: #FF6D00;border-radius: 50%; border: none; box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3);">
-					<i class="material-icons" style="margin:8px; color: #f0f0f0;">lock_open</i>
+				<button id="login" type="submit" name="submit">
+					<i class="material-icons">lock_open</i>
 				</button>
 			</form>
 		</div>

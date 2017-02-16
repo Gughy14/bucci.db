@@ -1,0 +1,165 @@
+/* Foglio di stile tema DARK */
+
+/*
+Progetto: Archivio atti edilizi - Comune di Buccinasco
+Autore: Guglielmone Fabio
+Versione: 0.1
+*/
+
+html,
+body {
+	background-color: #303030;
+	color: #ccc;
+}
+
+label {
+	color: #999;
+}
+
+.no-btn,
+.btn {
+	background-color: #808080;
+	color: #1a1a1a;
+}
+.no-btn:hover,
+.btn:hover {
+	background-color: #b3b3b3;
+}
+
+.btn-primary {
+	background: #2688d9;
+	color: #ddd;
+}
+.btn-primary:hover{
+	background: #52a0e0;
+}
+.btn-danger {
+	background: #e05252;
+	color: #FFF;
+}
+.btn-danger:hover{
+	background: #d9534f;
+}
+
+.panel-default > .panel-heading {
+	color: #bbb;
+}
+
+input,
+select,
+textarea {
+	color: #aaa;
+	background-color: #424242;
+	border: 0;
+	border-bottom: 2px solid #cccccc;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+   border-color: #a6a6f2;
+}
+
+input::-moz-placeholder,
+input::-ms-input-placeholder,
+input::-webkit-input-placeholder,
+select::-moz-placeholder,
+select::-ms-input-placeholder,
+select::-webkit-input-placeholder,
+textarea::-moz-placeholder,
+textarea::-ms-input-placeholder,
+textarea::-webkit-input-placeholder {
+	color: #999;
+	opacity: 1;
+}
+
+input[disabled],
+input[readonly],
+select[disabled],
+select[readonly],
+textarea[disabled],
+textarea[readonly], {
+	background-color: #424242;
+	opacity: 1;
+}
+
+.help-block {
+	color: #8c8c8c;
+}
+
+header {
+	background-color: #000;
+	color: #f0f0f0;
+}
+
+header .etichetta {
+	color: #fff;
+}
+
+.ui-datepicker-month,
+.ui-datepicker-year {
+	color: #aaa;
+	background-color: #424242;
+}
+
+/*HEADER*/
+
+#menu-icon i{
+	color: #fff;
+}
+
+.section.material{
+	background: #212121;
+}
+
+/*LOGIN*/
+#login-popup {
+	background: #424242;
+}
+
+#login-popup h3{
+	color: #ddd;
+}
+
+#login-popup p {
+	color: #ff4d4d;
+}
+
+#login-popup button#login {
+	background-color: #f69b55;
+}
+
+#login-popup button#login i{
+	color: #f0f0f0;
+}
+
+
+/* FOOTER */
+footer {
+	background-color: #000;
+}
+
+footer .wrapper {
+	color: #ccc;
+}
+
+.panel {
+	background: #424242;
+}
+.panel-default > .panel-heading {
+	border-bottom: 1px solid #999;
+}
+
+tbody > tr:hover{
+	background: #333;
+}
+
+tbody > tr > td > a > i,
+h3 > a > i,
+.panel-body a {
+	color: #ccc;
+}
+
+a.paginate_button.current {
+		background-color: #335c99;
+}

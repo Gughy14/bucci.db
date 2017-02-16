@@ -13,7 +13,7 @@ Versione: 0.2
 /*========== 00. Stili Elementi ==========*/
 * {
 	-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
+		 -moz-box-sizing: border-box;
 					box-sizing: border-box;
 }
 *:before,
@@ -24,8 +24,6 @@ Versione: 0.2
 }
 html {
 	font-family: Roboto,sans-serif;
-	background-color: #fafafa;
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 	-webkit-text-size-adjust: 100%;
 			-ms-text-size-adjust: 100%;
 }
@@ -35,8 +33,6 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-size: 14px;
 	line-height: 1.42857143;
-	color: #333;
-	background-color: #fafafa;
 }
 
 header,
@@ -66,7 +62,6 @@ small {
 }
 
 label {
-	color: #777;
 	display: block;
 	font-size: 13px;
 	margin: 0;
@@ -106,9 +101,6 @@ td {
 	border-radius: 2px;
 }
 
-tbody > tr:hover{
-	background: #f0f0f0;
-}
 
 /*========== 01. Material Design ==========*/
 
@@ -159,11 +151,9 @@ tbody > tr:hover{
 	font-family: Roboto;
 	font-weight: 700;
 	text-decoration: none;
-	color: #333;
-	background-color: #fafafa;
 	text-align: center;
 	letter-spacing: .5px;
-	transition: .2s ease-out;
+	transition: background-color, box-shadow .2s ease-out;
 	cursor: pointer;
 	outline: 0;
 	border: none;
@@ -171,7 +161,6 @@ tbody > tr:hover{
 	text-transform: uppercase;
 	vertical-align: middle;
 	-webkit-tap-highlight-color: transparent;
-
 }
 
 .btn {
@@ -183,20 +172,6 @@ tbody > tr:hover{
 }
 .btn:hover {
 	box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3);
-}
-.btn-primary {
-	background: #2196F3;
-	color: #FFF;
-}
-.btn-primary:hover{
-	background: #42A5F5;
-}
-.btn-danger {
-	background: #C00;
-	color: #FFF;
-}
-.btn-danger:hover{
-	background: #d9534f;
 }
 /*========== 02. Ex-Bootstrap ==========*/
 .row {
@@ -263,41 +238,41 @@ tbody > tr:hover{
 }
 
 .modal {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-		display: none;
-    overflow: hidden;
-    -webkit-overflow-scrolling: touch;
-    outline: 0;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1050;
+	display: none;
+	overflow: hidden;
+	-webkit-overflow-scrolling: touch;
+	outline: 0;
 }
 
 .modal-backdrop {
-    position: fixed;
-    top: 0;
-    right: 0;
-		height: 100%;
-    bottom: 0;
-    left: 0;
-    z-index: 1040;
-    background-color: #000;
+	position: fixed;
+	top: 0;
+	right: 0;
+	height: 100%;
+	bottom: 0;
+	left: 0;
+	z-index: 1040;
+	background-color: #000;
 }
 .modal-backdrop.fade {
-    filter: alpha(opacity=0);
-    opacity: 0.33;
+	filter: alpha(opacity=0);
+	opacity: 0.33;
 }
 
 .modal.fade .modal-dialog {
-    -webkit-transition: -webkit-transform .3s ease-out;
-    -o-transition: -o-transform .3s ease-out;
-    transition: transform .3s ease-out;
-    -webkit-transform: translate(0, -25%);
-    -ms-transform: translate(0, -25%);
-    -o-transform: translate(0, -25%);
-    transform: translate(0, -25%);
+	-webkit-transition: -webkit-transform .3s ease-out;
+	-o-transition: -o-transform .3s ease-out;
+	transition: transform .3s ease-out;
+	-webkit-transform: translate(0, -25%);
+	-ms-transform: translate(0, -25%);
+	-o-transform: translate(0, -25%);
+	transform: translate(0, -25%);
 }
 .modal-dialog {
 	position: relative;
@@ -340,9 +315,6 @@ tbody > tr:hover{
     border-top: 1px solid #e5e5e5;
 }
 
-.flip {
-	transform: scale(1, -1);
-}
 .close {
     float: right;
     font-size: 21px;
@@ -369,8 +341,6 @@ button.close {
     border: 0;
 }
 
-
-
 .input-container {
 	height: 50px;
 	border-bottom: 2px solid #e6e6e6;
@@ -378,18 +348,13 @@ button.close {
 	margin: 0 0 22px;
 }
 
-
-
 .panel {
 	margin-bottom: 20px;
 }
 .panel-default {
-    border-color: #ddd;
+	border-color: #ddd;
 }
-.panel-default > .panel-heading {
-	color: #777;
-	border-bottom: 1px solid #ddd;
-}
+
 .panel-title {
     margin-top: 0;
     margin-bottom: 0;
@@ -405,54 +370,31 @@ button.close {
 	margin-bottom: 15px;
 }
 
-.form-control {
+input,
+select,
+textarea {
 	resize: none;
 	display: block;
 	width: 100%;
 	height: 34px;
 	font-size: 14px;
 	line-height: 1.42857143;
-	color: #555;
-	background-color: #fff;
 	background-image: none;
 	outline: 0;
+}
+
+input::-ms-expand,
+select::-ms-expand,
+textarea::-ms-expand {
+	background-color: transparent;
 	border: 0;
-	border-bottom: 2px solid #e6e6e6;
 }
-.form-control:focus{
-   border-color: #8f8fef;
-}
-
-.form-control::-moz-placeholder {
-    color: #999;
-    opacity: 1;
-}
-.form-control:-ms-input-placeholder {
-    color: #999;
-}
-.form-control::-webkit-input-placeholder {
-    color: #999;
-}
-.form-control::-ms-expand {
-    background-color: transparent;
-    border: 0;
-}
-.form-control[disabled],
-.form-control[readonly],
-fieldset[disabled] .form-control {
-	background-color: #fff;
-	opacity: 1;
-}
-
 
 .help-block {
 	display: block;
 	margin-top: 12px;
 	margin-bottom: 6px;
-	color: #737373;
 }
-
-
 
 /*========== 03. Stili Globali ==========*/
 .container {
@@ -489,9 +431,7 @@ fieldset[disabled] .form-control {
 
 /*========== 03. Header ==========*/
 header {
-	color: #fff;
 	height: 64px;
-	background-color: #1976D2;
 	position: fixed;
 }
 header .icona {
@@ -517,7 +457,6 @@ header .icona.right {
 }
 header .etichetta {
 	display: block;
-	color: #fff;
 	cursor: pointer;
 	font-size: 12px;
 	height: 48px;
@@ -529,6 +468,7 @@ header .etichetta {
 	margin-top: 8px;
 	transition: .4s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
+
 header .etichetta.enlarged {
 	width: 64px;
 	margin: 8px 16px auto -12px;
@@ -559,8 +499,6 @@ header .etichetta.enlarged {
 	height: 24px;
 	font-size: 14px;
 	line-height: 1.42857143;
-	color: #555;
-	background-color: #fff;
 	background-image: none;
 	outline: 0;
 	border: 0;
@@ -703,4 +641,125 @@ header .etichetta.enlarged {
 }
 .ui-datepicker .ui-datepicker-buttonpane button {
 	margin: 0.5em;
+}
+
+/*HEADER*/
+
+#menu-icon i{
+	width: 24px;
+	vertical-align: middle;
+}
+
+#pagename-label {
+	left: 72px;
+	position: fixed;
+}
+
+#pn-container {
+	font-size: 18px;
+	line-height: 64px;
+}
+
+.etichetta .label {
+	margin-top: 16px;
+}
+
+.icona .material-icon {
+	width: 24px;
+	vertical-align: middle;
+}
+
+.section.material{
+	height: 192px;
+}
+
+
+
+/*LOGIN*/
+#login-popup {
+	position: absolute;
+	top: 144px;
+	width: 404px; 
+	height: 303px;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	padding: 44px 65px;
+}
+
+#login-popup h3{
+	margin: 0 0 10px;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+#login-popup p {
+	margin: 10px 0 30px;
+	font-size: 13px;
+	line-height: 160%;
+}
+
+#login-popup button#login {
+	top: 8px;
+	left: 245px;
+	position: relative;
+	display:block;
+	cursor: pointer;
+	height: 56px;
+	width: 56px;
+	border-radius: 50%;
+	border: none;
+	box-shadow: 0 6px 10px 0 rgba(0,0,0,0.3);
+}
+
+#login-popup button#login i{
+	margin:8px;
+}
+
+
+
+/* FOOTER */
+footer {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	display: block;
+	height: 32px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: fixed;
+}
+
+footer .wrapper {
+	line-height: 32px;
+}
+
+footer .update {
+	position: fixed;
+	left: 72px;
+}
+footer .edit {
+	position: fixed;
+	right: 72px;
+}
+
+
+
+/*CERCA*/
+
+form.container,
+.form.container {
+	margin-top: -96px;
+}
+
+.panel {
+	margin-top: 40px;
+}
+
+#results_list {
+	margin: 42px auto;
 }
